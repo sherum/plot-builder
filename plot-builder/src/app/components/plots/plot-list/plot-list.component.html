@@ -1,0 +1,20 @@
+<div class="container">
+<table class="table">
+ <thead>
+ <tr>
+   <th>Name</th>
+   <th>Delete</th>
+ </tr>
+ </thead>
+  <tbody>
+  <tr *ngFor="let plot of plotlist">
+    <td><a class="link" [routerLink]="['/plots',plot.id]">{{plot.name}}</a></td>
+    <td>Delete</td>
+  </tr>
+  </tbody>
+
+
+</table>
+
+</div>
+

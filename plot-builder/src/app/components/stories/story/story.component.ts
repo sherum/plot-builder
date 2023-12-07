@@ -10,35 +10,36 @@ import {NgForm} from "@angular/forms";
   templateUrl: './story.component.html',
   styleUrls: ['./story.component.css']
 })
-export class StoryComponent implements OnInit{
+export class StoryComponent implements OnInit {
 
-  story:IStory = defautStory;
+  story: IStory = defautStory;
+  storyId: string = '';
 
-  constructor(private plotService:PlotService,private route:ActivatedRoute,private router:Router) {
+  constructor(private plotService: PlotService, private route: ActivatedRoute, private router: Router) {
   }
 
-  ngOnInit(){
+  ngOnInit() {
 
     this.route.paramMap.subscribe(
       data => {
-       let storyId  = data.get('id');
-        console.log("Ng On init Story id ", storyId);
-        this.story = this.plotService.currentStories().find(story => story.id == storyId)
-        console.log("selected story ",this.story);
+        this.storyId = data.get('id');
+        console.log("Ng On init Story id ", this.storyId);
+        this.plotService.getStory(this.storyId).subscribe(storee => this.story = storee);
+        console.log("selected story ", this.story);
       }
     );
   }
 
 
+  addPlot() {
+    this.router.navigate(['/story', this.storyId,'plot']);
+  }
 
-  addPlot(){
+  addScene() {
 
   }
 
-  addScene(){
-
-  }
-  save(){
+  save() {
     this.plotService.updateCurrentStory(this.story);
     this.plotService.updateStory(this.story.id);
     this.router.navigate(['stories']);

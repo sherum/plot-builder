@@ -1,1 +1,24 @@
-<p>story-view works!</p>
+<div class="container">
+<button class="btn btn-sm btn-outline-primary my-1" type="button" (click)="back()">Back</button>
+  <div class="row">
+
+<div class="col-md-6 border 1px black my-2">
+
+   <label class=" col-md-4"><em> Title:</em> {{story.title}}</label><br/>
+   <label class=" col-md-4"><em> Author:</em> {{story.author}}</label><br/>
+
+   <label class=" col-md-4"><em> Genre:</em> {{story.genre}}</label><br/>
+   <label class=" col-md-8 my-1"><em> Maguffin:</em> {{story.maguffin}}</label><br/>
+   <label class=" col-md-8 my-1"><em> Summary:</em> {{story.summary}}</label><br/>
+
+</div>
+  <div class="col-md-3 border 1px black my-2">
+    <h4>Plots</h4>
+    <button class="btn btn-sm btn-outline-success" type="button" (click)="newPlot()">Add Plot</button>
+    <app-plot-list [plotlist]="story.plots"></app-plot-list>
+  </div>
+  </div>
+
+  <router-outlet></router-outlet>
+</div>
+

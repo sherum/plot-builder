@@ -60,7 +60,7 @@
     </div>
 <hr/>
       <div class="col">
-     <button (click)="addScene()" type="button" class="btn btn-sm btn-primary">Add Scene</button>
+     <button routerLink="scene" type="button" class="btn btn-sm btn-primary">Add Scene</button>
         <table class="table">
           <label>Scenes</label>
           <thead>
@@ -80,3 +80,4 @@
 
   </div>
 
+<router-outlet></router-outlet>

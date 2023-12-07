@@ -28,9 +28,6 @@ export class PlotViewComponent implements OnInit {
           const pid = params.get('id');
           this.plotService.updateCurrentPlot(this.getPlotById(pid));
 
-          const apid = this.plotService.currentPlot().parentId;
-          this.parentPlot = this.getPlotById(apid)
-          console.log("Parent Id", apid);
         }
       )
     }

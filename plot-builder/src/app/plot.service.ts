@@ -11,7 +11,7 @@ export class PlotService {
   endpoint = 'http://localhost:8080';
   currentPlot = signal<IPlot>({"name": "dummy"});
   currentStory = signal<IStory>(defautStory);
-  currentStories = signal<IStory[]>(new Array<IStory>());
+  //currentStories = signal<IStory[]>(new Array<IStory>());
   headers = new HttpHeaders({'Content-Type': 'application/json', 'Accept': 'application/json'});
 
   constructor(private http: HttpClient) {
@@ -26,7 +26,7 @@ export class PlotService {
   }
 
   updateCurrentStories(stories: IStory[]) {
-    this.currentStories.update(() => stories);
+   // this.currentStories.update(() => stories);
   }
 
   createPlot(plot: IPlot): Observable<IPlot> {
@@ -63,6 +63,22 @@ export class PlotService {
     return this.http.get<IStory[]>(uri, {headers: this.headers});
   }
 
+  savePlot(id:string, plot:IPlot):Observable<IPlot>{
+   let uri = `${this.endpoint}/plot`;
+   let putHeaders  = this.headers.append("Story-Id",id);
+   return this.http.post<IPlot>(uri,plot, {headers:putHeaders});
+  }
+ saveSubplot(storyId:string,parentId:string, plot:IPlot):Observable<IPlot>{
+   let uri = `${this.endpoint}/subplot`;
+   let putHeaders  = this.headers.append("Story-Id",storyId).append("Parent-Id",parentId);
+   return this.http.post<IPlot>(uri,plot, {headers:putHeaders});
+  }
+
+
+  getStory(id:string):Observable<IStory>{
+    let uri = `${this.endpoint}/stories/${id}`, selected;
+    return this.http.get<IStory>(uri,{headers:this.headers});
+  }
 
   // createStory(story: IStory): IStory {
   //   console.log("Story: ", story);

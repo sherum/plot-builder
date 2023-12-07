@@ -14,6 +14,9 @@ import { StoryListComponent } from './components/stories/story-list/story-list.c
 import { StoryViewComponent } from './components/stories/story-view/story-view.component';
 import {HttpClientModule} from "@angular/common/http";
 import { StoryEditComponent } from './components/stories/story-edit/story-edit.component';
+import { ProfileComponent } from './components/profiles/profile/profile.component';
+import { PlotDetailComponent } from './components/plots/plot-detail/plot-detail.component';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +28,9 @@ import { StoryEditComponent } from './components/stories/story-edit/story-edit.c
     StoryComponent,
     StoryListComponent,
     StoryViewComponent,
-    StoryEditComponent
+    StoryEditComponent,
+    ProfileComponent,
+    PlotDetailComponent
   ],
   imports: [
     BrowserModule,

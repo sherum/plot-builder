@@ -3,7 +3,6 @@ export interface IPlot {
   id?: string;
   description?: string;
   type?: string;
-  parentId?: string;
   subplots?: IPlot[];
 }
 

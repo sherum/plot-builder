@@ -4,6 +4,7 @@ import {defautStory, IStory} from "../../../plot.model";
 import {nextNewId} from "../../../index";
 import {Router} from "@angular/router";
 import { v4 as uuidv4 } from 'uuid';
+import {UserService} from "../../../user.service";
 
 @Component({
   selector: 'app-story-list',
@@ -13,13 +14,14 @@ import { v4 as uuidv4 } from 'uuid';
 export class StoryListComponent implements OnInit {
   storyList =  this.plotService.getStories();
 
-  constructor(private plotService: PlotService, private router: Router){
+  constructor(private plotService: PlotService, private userService:UserService,private router: Router){
   }
 
   ngOnInit() {
-    this.plotService.getStories().subscribe(data => this.plotService.updateCurrentStories(data));
 
-    console.log("Signals List", this.plotService.currentStories());
+   // this.plotService.getStories(this.userService.currentId).subscribe(data => this.plotService.updateCurrentStories(data));
+
+   // console.log("Signals List", this.plotService.currentStories());
 
   }
 

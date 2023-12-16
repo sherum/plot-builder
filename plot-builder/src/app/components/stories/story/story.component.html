@@ -53,7 +53,7 @@
         </thead>
         <tbody>
         <tr *ngFor="let plot of story.plots">
-          <td>{{plot.name}}</td>
+          <td><a class="link" (click)="selectPlot(plot)"> {{plot.name}}</a></td>
         </tr>
         </tbody>
       </table>

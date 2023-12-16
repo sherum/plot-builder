@@ -1,0 +1,18 @@
+<h4> Subplots</h4>
+<table class="table">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let plot of subplots ">
+    <!--          <td><a class="link" [routerLink]="['/plots',plot.id]">{{plot.name}}</a></td>-->
+    <td><a class="link" (click)="select(plot)">{{plot.name}}</a></td>
+    <td>{{plot.type}}</td>
+  </tr>
+  </tbody>
+
+
+</table>

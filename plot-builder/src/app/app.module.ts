@@ -16,6 +16,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { StoryEditComponent } from './components/stories/story-edit/story-edit.component';
 import { ProfileComponent } from './components/profiles/profile/profile.component';
 import { PlotDetailComponent } from './components/plots/plot-detail/plot-detail.component';
+import {SubplotComponent} from "./components/plots/plot-subplot/subplot.component";
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { PlotDetailComponent } from './components/plots/plot-detail/plot-detail.
     StoryViewComponent,
     StoryEditComponent,
     ProfileComponent,
-    PlotDetailComponent
+    PlotDetailComponent,
+    SubplotComponent
   ],
   imports: [
     BrowserModule,

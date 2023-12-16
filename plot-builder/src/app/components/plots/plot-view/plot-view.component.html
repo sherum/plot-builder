@@ -1,19 +1,102 @@
+<div class="container">
+
+
+  <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="btn-group mr-2" role="group" aria-label="First group">
+      <button (click)="addPlot()" type="button" class="btn btn-sm btn-outline-success">Add Plot</button>
+    </div>
+    <div class="btn-group col-md-6" role="group" aria-label="Second group">
+
+
+    </div>
+    <div class="btn-group" role="group" aria-label="Third group">
+      <button class="btn btn-sm btn-outline-primary" type="button" (click)="back()">Back to Story</button>
+    </div>
+  </div>
+
+
+
+
+  <table class="table">
+    <label>Plots</label>
+    <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let plot of story.plots">
+      <td><a class="link" (click)="selectPlot(plot)"> {{plot.name}}</a></td>
+    </tr>
+    </tbody>
+  </table>
+
+
+<hr/>
+
+
+<div class="row my-2">
+  <div class="col-offset-8 ">
+    <button class="btn btn-sm btn-outline-success" type="button" (click)="addSubplot()">Add Subplot</button>
+  </div>
+  <div class="col-offset-8 ">
+    <button class="btn btn-sm btn-outline-success" type="button" (click)="addEvent()">Add Event</button>
+  </div>
+</div>
 
 
 <div class="row">
 
+  <div class="col-md-7 ">
+    <!--  <router-outlet></router-outlet>-->
+    <div class="row">
+      <div class="col my-5">
+        <button *ngIf="cursor > 0" class="button btn btn-sm btn-outline-info" (click)="previous()"><--</button>
+      </div>
+      <div class="col-10">
+        <app-plot-detail
+          [plot]="plot"
+          (savePlot)="updatePlotTree($event)"
+        ></app-plot-detail>
+      </div>
 
-<div class="col-3">
-  <H4>Parent</H4>
-  <hr/>
-<!--  <app-plot-element [plot]="parentPlot"></app-plot-element>-->
+      <div class="col my-5">
+        <button *ngIf="cursor-1 < hx.length" class="button btn btn-sm btn-outline-info" (click)="next()">--></button>
+      </div>
+    </div>
+  </div>
+    <div class="col-md-2">
+      <app-plot-subplot
+        [subplots]="plot.subplots"
+        (selectedPlot)="setCurrentPlot($event)"
+      ></app-plot-subplot>
+      <!--    <router-outlet name="subplot"></router-outlet>-->
+    </div>
+  </div>
 </div>
-<div class="col-9">
-  <h4>Curent</h4>
-  <hr/>
-<!--  <app-plot-element [plot]="parentPlot"></app-plot-element>-->
 
+<div class="container">
+  <router-outlet></router-outlet>
 </div>
-</div>
+<!--<div class="container">-->
+<!--  <div class="col-md-6">-->
 
+<!--<h5> plot view</h5>-->
+<!--{{plot|json}}-->
+<!--  </div>-->
+<!--  <div class="col-md-2">-->
+<!--  {{cursor}}-->
+<!--  </div>-->
+
+<!--  <div class="col-md-4">-->
+<!--    <table class="table">-->
+<!--      <tbody>-->
+<!--      <tr *ngFor="let item of hx">-->
+<!--        <td>{{item.name}}</td>-->
+<!--      </tr>-->
+<!--      </tbody>-->
+<!--    </table>-->
+
+<!--  </div>-->
+<!--</div>-->
 

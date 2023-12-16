@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IPlot} from "../../../plot.model";
 import {PlotService} from "../../../plot.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -8,22 +8,43 @@ import {ActivatedRoute, Router} from "@angular/router";
   templateUrl: './plot-detail.component.html',
   styleUrls: ['./plot-detail.component.css']
 })
-export class PlotDetailComponent implements OnInit{
+export class PlotDetailComponent implements OnInit {
 
-  plot:IPlot|undefined;
-  subplots:IPlot[]|undefined;
+  @Input() plot;
+  @Output() savePlot = new EventEmitter<IPlot>()
+  parentId = "";
 
 
-  constructor(private plotService:PlotService,private route:ActivatedRoute,private router:Router) {
+  constructor(private plotService: PlotService, private route: ActivatedRoute, private router: Router) {
   }
 
-  ngOnInit(){
-    console.log("I'm a Plot Detail!");
-    this.plot = this.plotService.currentPlot();
-    console.log("This plot", this.plot);
-    console.log("Signal", this.plotService.currentPlot());
-    //this.subplots = this.plot.subplots;
+  ngOnInit() {
+
+
+    // this.route.paramMap.subscribe(
+    //   param =>{
+    //     this.parentId  = param.get('id');
+    //    // this.plot = this.plotService.currentPlot();
+    //
+    //   }
+    // )
+
+
   }
 
+
+  save(form) {
+    let update: IPlot = {
+      name: form.value.name,
+      type: form.value.type,
+      id: form.value.id,
+      parentId: form.value.parentId,
+      description: form.value.description
+    }
+    this.savePlot.emit(update);
+    // this.plotService.savePlot(this.parentId,plot).subscribe(
+    //   plotted => console.log("saved plot", plotted)
+    // );
+  }
 
 }

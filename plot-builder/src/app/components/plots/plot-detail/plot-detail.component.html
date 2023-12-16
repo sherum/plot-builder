@@ -1,2 +1,54 @@
-<p>plot-detail works!</p>
-{{plot.name}}
+<div class="container">
+
+  <div class="container my-3">
+
+
+    <div class="row">
+      <h4>Plot Builder</h4>
+
+      <div class="col-md-12">
+        <form #form=ngForm>
+          <div class="row">
+
+
+            <div class="form-group col ">
+              <label class="form-label mx-2">Name </label>
+              <input name="name" class="form-control" type="text" [ngModel]="plot.name"/>
+            </div>
+            <div class="form-group col">
+              <label class="form-label mx-2">Plot Type</label>
+              <input class="form-control" aria-label="plot type"   [(ngModel)]="plot.type" name="type" />
+
+              <!--        <option value="story">Story</option>-->
+              <!--        <option value="character">Character</option>-->
+              <!--        <option value="event">Event</option>-->
+              <!--        <option value="location">Location</option>-->
+              <!--        <option value="thing">Thing</option>-->
+
+
+            </div>
+          </div>
+          <div class="form-group" [hidden]="true">
+            <label class="form-label">Id</label>
+            <input name="id" class="form-control" type="text" [ngModel]="plot.id"/>
+          </div>
+
+          <div class="form-group" [hidden]="true">
+            <label class="form-label">Parent Id</label>
+            <input name="parentId" class="form-control" type="text" [ngModel]="plot.parentId"/>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Description</label>
+            <textarea name="description" class="form-control" type="text" rows="4" [ngModel]="plot.description"></textarea>
+          </div>
+          <button  type="button" class="btn btn-outline-primary my-2 end" (click)="save(form)">Save</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+

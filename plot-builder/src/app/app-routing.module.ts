@@ -10,13 +10,17 @@ import {PlotListComponent} from "./components/plots/plot-list/plot-list.componen
 import {StoryViewComponent} from "./components/stories/story-view/story-view.component";
 import {PlotElementComponent} from "./components/plots/plot-element/plot-element.component";
 import {PlotDetailComponent} from "./components/plots/plot-detail/plot-detail.component";
+import {SubplotComponent} from "./components/plots/plot-subplot/subplot.component";
 
 const routes: Routes = [
-  {
-    path: 'plots', component: PlotListComponent, children: [
-      {path: ':id', component: PlotDetailComponent}
-    ]
-  },
+  // {
+  //   path: 'plots', component: PlotViewComponent, children: [
+  //     {path: ':id', component: PlotDetailComponent},
+  //     {path:'',component: SubplotComponent,outlet:'subplot'}
+  //   ]
+  // },
+
+  { path: 'plots', component: PlotViewComponent},
 
 
   {

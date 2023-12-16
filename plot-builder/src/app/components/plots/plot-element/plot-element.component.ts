@@ -3,6 +3,7 @@ import {IPlot} from "../../../plot.model";
 import {PlotService} from "../../../plot.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {map, Subscription} from "rxjs";
+import {uid4} from "../../../index";
 
 @Component({
   selector: 'app-plot-element',
@@ -10,7 +11,12 @@ import {map, Subscription} from "rxjs";
   styleUrls: ['./plot-element.component.css']
 })
 export class PlotElementComponent implements OnInit {
-  plot: IPlot = {name: "new plot"};
+  plot:IPlot = {
+    name:'new',
+    type:'Character',
+    description:'plot description',
+    id:uid4(),
+    };
   storyId = "";
   plotId = "";
 
@@ -24,25 +30,18 @@ export class PlotElementComponent implements OnInit {
     let foo = this.router.url.split("/")
     this.storyId = foo[2];
     console.log("Foo length: ", foo.length);
-
-    console.log("sid ",this.storyId);
+    console.log("plot type ",this.plot.type);
     }
 
 
   save(form) {
-    this.plot.id = form.value.id;
-    this.plot.name = form.value.name;
+   this.plot.name = form.value.name;
     this.plot.type = form.value.type;
     this.plot.description = form.value.description
 
-    this.plotService.savePlot(this.storyId,this.plot).subscribe(
+    this.plotService.saveTopPlot(this.storyId,this.plot).subscribe(
       plotted => console.log("saved plot",plotted)
     );
   }
-
-  onChange(event) {
-    this.plot.type = event.value;
-  }
-
 
 }

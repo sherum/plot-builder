@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {PlotService} from "../../../plot.service";
 import {defautStory, IStory} from "../../../plot.model";
-import {nextNewId} from "../../../index";
+import {nextNewId, uid4} from "../../../index";
 import {Router} from "@angular/router";
-import { v4 as uuidv4 } from 'uuid';
 import {UserService} from "../../../user.service";
 
 @Component({
@@ -12,7 +11,7 @@ import {UserService} from "../../../user.service";
   styleUrls: ['./story-list.component.css']
 })
 export class StoryListComponent implements OnInit {
-  storyList =  this.plotService.getStories();
+  storyList =  this.plotService.currentStories;
 
   constructor(private plotService: PlotService, private userService:UserService,private router: Router){
   }
@@ -27,9 +26,14 @@ export class StoryListComponent implements OnInit {
 
   createStory() {
     console.log("Creeat sotry pressed to show form");
-    let id = uuidv4();
+    let id = uid4();
     console.log("UUID is ",id);
     this.router.navigate(['/stories', id,'new']);
+  }
+
+  selectStory(story:IStory){
+    this.plotService.updateCurrentStory(story);
+    this.router.navigate(['/stories',story.id]);
   }
 
 

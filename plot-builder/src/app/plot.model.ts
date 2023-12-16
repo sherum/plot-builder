@@ -1,9 +1,12 @@
 export interface IPlot {
   name: string;
   id?: string;
+  parentId?:string;
   description?: string;
   type?: string;
   subplots?: IPlot[];
+  events?:[];
+  scenes?:[];
 }
 
 export interface IScene {
@@ -48,25 +51,23 @@ export const defautStory:IStory = {
   "scenes": new Array<IScene>()
 }
 
-export const defaultPlots = [
+export const defaultPlots:IPlot[] = [
   {
     "description": "An investigation into a specious air disaster creates more questions than it answers as the evidence pushes  progressively more inexplicable root causes.",
     "id": "AA",
     "name": "main plot",
-    "parentId": "AA",
     "type": "story",
     "subplots": [
       {
         "description": "Felcia's boss puts her in charge of the investigaton knowing she is unhinged.",
         "id": "AAA",
         "name": "Act 1",
-        "parentId": "AA",
         "subplots": [
           {
             "description": "Establish Felicia is crazy/PTSD coming off her last job.",
             "id": "AAAA",
             "name": "PROT development",
-            "parentId": "AAA",
+
             "type": "arc",
             "subplots": []
           }

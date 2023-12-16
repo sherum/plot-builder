@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PlotService} from "../../../plot.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {defautStory, IStory} from "../../../plot.model";
+import {defautStory, IPlot, IStory} from "../../../plot.model";
 import {NgForm} from "@angular/forms";
 
 
@@ -12,7 +12,7 @@ import {NgForm} from "@angular/forms";
 })
 export class StoryComponent implements OnInit {
 
-  story: IStory = defautStory;
+  story: IStory = this.plotService.currentStory();
   storyId: string = '';
 
   constructor(private plotService: PlotService, private route: ActivatedRoute, private router: Router) {
@@ -20,19 +20,17 @@ export class StoryComponent implements OnInit {
 
   ngOnInit() {
 
-    this.route.paramMap.subscribe(
-      data => {
-        this.storyId = data.get('id');
-        console.log("Ng On init Story id ", this.storyId);
-        this.plotService.getStory(this.storyId).subscribe(storee => this.story = storee);
-        console.log("selected story ", this.story);
-      }
-    );
   }
 
 
   addPlot() {
-    this.router.navigate(['/story', this.storyId,'plot']);
+    this.router.navigate(['/story', this.story.id,'plot']);
+  }
+
+  selectPlot(plot:IPlot){
+    this.plotService.currentPlot.set(plot);
+    // this.router.navigate( ['/plots',plot.id]);
+    this.router.navigate( ['/plots']);
   }
 
   addScene() {

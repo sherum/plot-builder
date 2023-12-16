@@ -1,32 +1,35 @@
 import {Injectable, signal} from '@angular/core';
-import {defautStory, IPlot, IScene, IStory} from "./plot.model";
+import {defaultPlots, defautStory, IPlot, IScene, IStory} from "./plot.model";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable} from "rxjs";
-
+import {Observable, Subject} from "rxjs";
+import {DEFAULT_ID} from "./index";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlotService {
   endpoint = 'http://localhost:8080';
-  currentPlot = signal<IPlot>({"name": "dummy"});
-  currentStory = signal<IStory>(defautStory);
-  //currentStories = signal<IStory[]>(new Array<IStory>());
-  headers = new HttpHeaders({'Content-Type': 'application/json', 'Accept': 'application/json'});
 
+  currentPlot = signal<IPlot>(defaultPlots[0]);
+  currentStory = signal<IStory>(defautStory);
+  // @ts-ignore
+  currentStories = this.getStories();
+  headers = new HttpHeaders({'Content-Type': 'application/json', 'Accept': 'application/json'});
+  //currentPlot$ = this.currentPlot.asObservable();
+  currentSubplot$:Observable<IPlot[]>
   constructor(private http: HttpClient) {
   }
 
-  updateCurrentPlot(plot: IPlot) {
-    this.currentPlot.update(() => plot);
-  }
+  // nextPlot(plot:IPlot){
+  //   this.currentPlot.next(plot);
+  // }
 
   updateCurrentStory(story: IStory) {
-    this.currentStory.update(() => story);
+    this.currentStory.set(story);
   }
 
   updateCurrentStories(stories: IStory[]) {
-   // this.currentStories.update(() => stories);
+    // this.currentStories.update(() => stories);
   }
 
   createPlot(plot: IPlot): Observable<IPlot> {
@@ -48,7 +51,7 @@ export class PlotService {
     })
   }
 
-  updateStory(id:string) {
+  updateStory(id: string) {
     let uri = `${this.endpoint}/story/${id}`;
     this.http.put<IStory>(uri, this.currentStory(), {headers: this.headers}).subscribe({
       next: data => this.updateCurrentStory(data),
@@ -63,42 +66,52 @@ export class PlotService {
     return this.http.get<IStory[]>(uri, {headers: this.headers});
   }
 
-  savePlot(id:string, plot:IPlot):Observable<IPlot>{
-   let uri = `${this.endpoint}/plot`;
-   let putHeaders  = this.headers.append("Story-Id",id);
-   return this.http.post<IPlot>(uri,plot, {headers:putHeaders});
-  }
- saveSubplot(storyId:string,parentId:string, plot:IPlot):Observable<IPlot>{
-   let uri = `${this.endpoint}/subplot`;
-   let putHeaders  = this.headers.append("Story-Id",storyId).append("Parent-Id",parentId);
-   return this.http.post<IPlot>(uri,plot, {headers:putHeaders});
+  saveTopPlot(id: string, plot: IPlot): Observable<IPlot> {
+    let uri = `${this.endpoint}/plot`;
+    let putHeaders = this.headers.append("Story-Id", id);
+    return this.http.post<IPlot>(uri, plot, {headers: putHeaders});
   }
 
+  savePlot(parentId:string,plot:IPlot):Observable<IPlot>{
+    let uri = `${this.endpoint}/plot/save/${parentId}`;
+    return this.http.post<IPlot>(uri, plot, {headers: this.headers});
+  }
+ updatePlot(plotId:string,plot:IPlot):Observable<IPlot>{
+    let uri = `${this.endpoint}/plot/save/${plotId}`;
+    return this.http.put<IPlot>(uri, plot, {headers: this.headers});
+  }
 
-  getStory(id:string):Observable<IStory>{
+  savePlotTree(id:string,plot:IPlot):Observable<IPlot>{
+    if(plot.id == DEFAULT_ID){
+      return this.savePlot(id,plot);
+    }else{
+      return this.updatePlot(id,plot);
+    }
+  }
+
+  saveSubplot(storyId: string, parentId: string, plot: IPlot): Observable<IPlot> {
+    let uri = `${this.endpoint}/subplot`;
+    let putHeaders = this.headers.append("Story-Id", storyId).append("Parent-Id", parentId);
+    return this.http.post<IPlot>(uri, plot, {headers: putHeaders});
+  }
+
+//   getSubplots(storyId:string,plotId:string):Observable<IPlot[]|[]> {
+//     let uri = `${this.endpoint}/plot/subplots/${storyId}/${plotId}`;
+//     return this.http.get<IPlot[]>(uri,{headers:this.headers});
+//
+//
+// }
+
+
+  getStory(id: string): Observable<IStory> {
     let uri = `${this.endpoint}/stories/${id}`, selected;
-    return this.http.get<IStory>(uri,{headers:this.headers});
+    return this.http.get<IStory>(uri, {headers: this.headers});
   }
 
-  // createStory(story: IStory): IStory {
-  //   console.log("Story: ", story);
-  //   let uri = `${this.endpoint}/story`
-  //   let response;
-  //   this.http.post<IStory>(uri, {story}, {headers: this.headers}).subscribe(
-  //     (data: IStory) => {
-  //       response = {
-  //         title: data.title,
-  //         id: data.id,
-  //         author: data.author,
-  //         genre: data.genre,
-  //         maguffin: data.maguffin,
-  //         summary: data.summary,
-  //         plots: data.plots,
-  //         scenes: data.scenes
-  //       };
-  //       console.log("response from service", response);
-  //     }
-  //   );
-  //   return response;
-  // }
+  getPlot(id: string): Observable<IPlot> {
+    let uri = `${this.endpoint}/plot/${id}`;
+    return this.http.get<IPlot>(uri, {headers: this.headers});
+  }
+
+
 }

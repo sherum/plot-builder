@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "plot-builder:build:production"
+              "buildTarget": "plot-builder:build:production"
             },
             "development": {
-              "browserTarget": "plot-builder:build:development"
+              "buildTarget": "plot-builder:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -71,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "plot-builder:build"
+            "buildTarget": "plot-builder:build"
           }
         },
         "test": {

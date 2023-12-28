@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, effect, OnInit} from '@angular/core';
+import {PlotService} from "./plot.service";
 
 @Component({
   selector: 'app-root',
@@ -8,8 +9,9 @@ import {Component, OnInit} from '@angular/core';
 export class AppComponent implements OnInit{
   title = 'plot-builder';
   isAuthenticated = true;
+  story = true;
 
-  constructor() {
+  constructor(private plotService:PlotService) {
   }
 
   ngOnInit() {

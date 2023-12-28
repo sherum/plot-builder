@@ -1,0 +1,22 @@
+
+<div class="col-md-6" *ngFor="let plot of plotlist">
+
+    <table class="table" *ngIf="listLength">
+      <thead>
+      <tr>
+        <th>Name</th>
+
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><a class="link" [routerLink]="[plot.id]">{{plot.name}}</a></td>
+        <app-plot-loop [plotlist]="plot.subplots"  ></app-plot-loop>
+      </tr>
+      </tbody>
+
+
+
+    </table>
+</div>

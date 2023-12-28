@@ -14,18 +14,22 @@ import {NgForm} from "@angular/forms";
 export class StoryEditComponent implements OnInit{
 
   story:IStory = defautStory;
+  new = true;
 
   constructor(private plotService:PlotService,private route:ActivatedRoute,private router:Router) {
   }
 
   ngOnInit(){
-    this.route.paramMap.subscribe(
+    this.route.params.subscribe(
       data => {
-        let storyId  = data.get('id');
-        console.log("Ng On init Story id ", storyId);
-        this.story.id = storyId;
+        let id  = data['id'];
+
+        this.plotService.getStory(id).subscribe(storee => this.story = storee);
+
       }
     );
+
+    this.route.queryParams.subscribe(params => this.new = params['new'])
   }
 
 
@@ -40,4 +44,10 @@ export class StoryEditComponent implements OnInit{
     this.router.navigate(['stories']);
   }
 
+
+  update() {
+    this.plotService.updateCurrentStory(this.story);
+    this.plotService.updateStory(this.story.id);
+    this.router.navigate(['stories']);
+  }
 }

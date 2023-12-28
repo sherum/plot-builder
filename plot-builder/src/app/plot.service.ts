@@ -1,8 +1,9 @@
 import {Injectable, signal} from '@angular/core';
-import {defaultPlots, defautStory, IPlot, IScene, IStory} from "./plot.model";
+import {defaultPlots, defautStory, IEvent, IPlot, IScene, IStory, defautEvents} from "./plot.model";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable, Subject} from "rxjs";
 import {DEFAULT_ID} from "./index";
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,14 @@ export class PlotService {
 
   currentPlot = signal<IPlot>(defaultPlots[0]);
   currentStory = signal<IStory>(defautStory);
+  currentEvents = signal<IEvent[]>(defautEvents);
+
   // @ts-ignore
   currentStories = this.getStories();
   headers = new HttpHeaders({'Content-Type': 'application/json', 'Accept': 'application/json'});
   //currentPlot$ = this.currentPlot.asObservable();
   currentSubplot$:Observable<IPlot[]>
+
   constructor(private http: HttpClient) {
   }
 
@@ -51,6 +55,7 @@ export class PlotService {
     })
   }
 
+
   updateStory(id: string) {
     let uri = `${this.endpoint}/story/${id}`;
     this.http.put<IStory>(uri, this.currentStory(), {headers: this.headers}).subscribe({
@@ -60,6 +65,16 @@ export class PlotService {
     })
   }
 
+
+  saveEvent(plotId:string,event:IEvent):Observable<IEvent>{
+    let uri = `${this.endpoint}/event/save/${plotId}`;
+    return this.http.post<IEvent>(uri,event,{headers:this.headers})
+  }
+
+  getEvents(plotId:string):Observable<IEvent[]>{
+    let uri = `${this.endpoint}/plot/${plotId}`;
+    return this.http.get<IEvent[]>(uri,{headers:this.headers});
+  }
 
   getStories(): Observable<IStory[]> {
     let uri = `${this.endpoint}/stories`
@@ -76,6 +91,11 @@ export class PlotService {
     let uri = `${this.endpoint}/plot/save/${parentId}`;
     return this.http.post<IPlot>(uri, plot, {headers: this.headers});
   }
+  savePlotEvent(plotId:string,event:IEvent):Observable<IPlot>{
+    let uri = `${this.endpoint}/plot/event/save/${plotId}`
+    return this.http.post<IPlot>(uri,event,{headers:this.headers});
+}
+
  updatePlot(plotId:string,plot:IPlot):Observable<IPlot>{
     let uri = `${this.endpoint}/plot/save/${plotId}`;
     return this.http.put<IPlot>(uri, plot, {headers: this.headers});
@@ -104,7 +124,7 @@ export class PlotService {
 
 
   getStory(id: string): Observable<IStory> {
-    let uri = `${this.endpoint}/stories/${id}`, selected;
+    let uri = `${this.endpoint}/stories/${id}`;
     return this.http.get<IStory>(uri, {headers: this.headers});
   }
 

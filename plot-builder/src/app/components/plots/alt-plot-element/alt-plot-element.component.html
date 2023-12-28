@@ -1,0 +1,60 @@
+<div class="container my-3">
+
+  <div class="row">
+    <h5>Plot Builder</h5>
+    <div class="col-md-6">
+      <form #form=ngForm>
+        <div class="row">
+
+
+          <div class="form-group col ">
+            <label class="form-label mx-2">Name </label>
+            <input name="name" class="form-control" type="text" [ngModel]="plot.name"/>
+          </div>
+          <div class="form-group col">
+            <label class="form-label mx-2">Plot Type</label>
+            <input class="form-control" aria-label="plot type" [(ngModel)]="plot.type" name="type"/>
+
+            <!--        <option value="story">Story</option>-->
+            <!--        <option value="character">Character</option>-->
+            <!--        <option value="event">Event</option>-->
+            <!--        <option value="location">Location</option>-->
+            <!--        <option value="thing">Thing</option>-->
+
+
+          </div>
+        </div>
+        <div class="form-group" [hidden]="true">
+          <label class="form-label">Id</label>
+          <input name="id" class="form-control" type="text" [ngModel]="plot.id"/>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Description</label>
+          <textarea name="description" class="form-control" type="text" rows="4"
+                    [ngModel]="plot.description"></textarea>
+        </div>
+        <button type="button" class="btn btn-outline-primary my-2 end" (click)="save(form)">Save</button>
+
+      </form>
+    </div>
+
+
+<!--        <div class="col-md-3">-->
+<!--          <app-plot-subplot-->
+<!--          [subplots]="plot.subplots"-->
+<!--          (selectedPlot)="select($event)"></app-plot-subplot>-->
+<!--        </div>-->
+        <div class="col-md-3">
+          <app-event-list
+          [events]="plot.events"></app-event-list>
+
+        </div>
+
+  </div>
+  <div class="row">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+

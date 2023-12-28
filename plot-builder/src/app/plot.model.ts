@@ -1,3 +1,14 @@
+export interface IEvent{
+  id:string;
+  name:string;
+  dtg:string;
+  type?:string;
+  location?:string;
+  description?:string;
+}
+
+import {DEFAULT_ID} from "./index";
+
 export interface IPlot {
   name: string;
   id?: string;
@@ -5,7 +16,7 @@ export interface IPlot {
   description?: string;
   type?: string;
   subplots?: IPlot[];
-  events?:[];
+  events?:IEvent[];
   scenes?:[];
 }
 
@@ -22,6 +33,7 @@ export interface IScene {
   people:[]
   plot:IPlot;
 }
+
 
 
 export interface IStory {
@@ -50,6 +62,14 @@ export const defautStory:IStory = {
   "plots": new Array<IPlot>(),
   "scenes": new Array<IScene>()
 }
+export const defautEvents:IEvent[] =[{
+
+  "description": "New event",
+  "id": DEFAULT_ID,
+  "dtg":"22 Jun 2026: 1400",
+  "name": "Test Anomaly",
+  "type": "incident"
+}]
 
 export const defaultPlots:IPlot[] = [
   {

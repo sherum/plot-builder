@@ -4,6 +4,7 @@ import {defautStory, IStory} from "../../../plot.model";
 import {nextNewId, uid4} from "../../../index";
 import {Router} from "@angular/router";
 import {UserService} from "../../../user.service";
+import {StoryService} from "../../../story.service";
 
 @Component({
   selector: 'app-story-list',
@@ -13,7 +14,7 @@ import {UserService} from "../../../user.service";
 export class StoryListComponent implements OnInit {
   storyList =  this.plotService.currentStories;
 
-  constructor(private plotService: PlotService, private userService:UserService,private router: Router){
+  constructor(private plotService: PlotService, private userService:UserService,private router: Router,private storyService:StoryService){
   }
 
   ngOnInit() {
@@ -26,14 +27,17 @@ export class StoryListComponent implements OnInit {
 
   createStory() {
     console.log("Creeat sotry pressed to show form");
-    let id = uid4();
+    let id = "A";
     console.log("UUID is ",id);
-    this.router.navigate(['/stories', id,'new']);
+    this.router.navigate(['/stories/edit', id],{ queryParams: { new: true } });
   }
 
   selectStory(story:IStory){
+    //****************subject***********
+    this.storyService.selectStory(story);
+    //**********************************
     this.plotService.updateCurrentStory(story);
-    this.router.navigate(['/stories',story.id]);
+    // this.router.navigate(['/e,story.id]);
   }
 
 

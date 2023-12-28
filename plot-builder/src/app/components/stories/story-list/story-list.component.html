@@ -1,3 +1,5 @@
+
+
 <div class="container">
 <button type="button" class="btn btn-primary" (click)="createStory()">Create Story</button>
   <h2 class="display-4">Story List</h2>
@@ -9,13 +11,16 @@
         <th>Title</th>
         <th>Author</th>
         <th>Genre</th>
+<!--        <th>Detail View</th>-->
       </tr>
       </thead>
       <tbody>
         <tr *ngFor="let story of storyList|async">
-        <td><a (click)="selectStory(story)" class="link">{{story.title}}</a> </td>
+<!--        <td><a (click)="selectStory(story)" class="link">{{story.title}}</a> </td>-->
+          <td><a [routerLink]="['/stories/story',story.id]" class="link">{{story.title}}</a> </td>
         <td>{{story.author}}</td>
         <td>{{story.genre}}</td>
+<!--          <td><a [routerLink]="['/stories/story',story.id]" class="link">Details</a> </td>-->
       </tr>
       </tbody>
     </table>

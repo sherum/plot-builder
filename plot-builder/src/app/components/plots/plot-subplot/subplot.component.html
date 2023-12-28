@@ -8,7 +8,7 @@
   </thead>
   <tbody>
   <tr *ngFor="let plot of subplots ">
-    <!--          <td><a class="link" [routerLink]="['/plots',plot.id]">{{plot.name}}</a></td>-->
+<!--              <td><a class="link" [routerLink]="[plot.id]">{{plot.name}}</a></td>-->
     <td><a class="link" (click)="select(plot)">{{plot.name}}</a></td>
     <td>{{plot.type}}</td>
   </tr>

@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import {ExtraOptions, RouterModule, Routes} from '@angular/router';
 import {PlotComponent} from "./components/plots/plot/plot.component";
 import {PlotViewComponent} from "./components/plots/plot-view/plot-view.component";
 import {StoryListComponent} from "./components/stories/story-list/story-list.component";
@@ -11,7 +11,14 @@ import {StoryViewComponent} from "./components/stories/story-view/story-view.com
 import {PlotElementComponent} from "./components/plots/plot-element/plot-element.component";
 import {PlotDetailComponent} from "./components/plots/plot-detail/plot-detail.component";
 import {SubplotComponent} from "./components/plots/plot-subplot/subplot.component";
+import {EventComponent} from "./components/events/event/event.component";
+import {OmniListComponent} from "./components/omni/omni-list/omni-list.component";
+import {alt_routes} from "./routes";
 
+
+const routingConfiguration: ExtraOptions = {
+  paramsInheritanceStrategy: 'always'
+};
 const routes: Routes = [
   // {
   //   path: 'plots', component: PlotViewComponent, children: [
@@ -20,8 +27,13 @@ const routes: Routes = [
   //   ]
   // },
 
-  { path: 'plots', component: PlotViewComponent},
-
+  { path: 'plots', component: PlotViewComponent, children: [
+      {path: 'event/:id', component: EventComponent}
+  ]},
+  {path: "omni", component: OmniListComponent,children:[
+      {path:'plot/:id',component: PlotViewComponent},
+      {path:'plot/:id/event',component: EventComponent}
+    ]},
 
   {
     path: 'stories', component: StoryListComponent, children: [
@@ -37,7 +49,7 @@ const routes: Routes = [
 ]
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(alt_routes,routingConfiguration)],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

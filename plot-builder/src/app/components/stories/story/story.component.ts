@@ -12,14 +12,22 @@ import {NgForm} from "@angular/forms";
 })
 export class StoryComponent implements OnInit {
 
-  story: IStory = this.plotService.currentStory();
+  // story: IStory = this.plotService.currentStory();
+   story: IStory;
   storyId: string = '';
 
   constructor(private plotService: PlotService, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
+    this.route.params.subscribe(
+      data => {
+        let id  = data['id'];
 
+        this.plotService.getStory(id).subscribe(storee => this.story = storee);
+
+      }
+    );
   }
 
 
@@ -30,7 +38,8 @@ export class StoryComponent implements OnInit {
   selectPlot(plot:IPlot){
     this.plotService.currentPlot.set(plot);
     // this.router.navigate( ['/plots',plot.id]);
-    this.router.navigate( ['/plots']);
+    // this.router.navigate( ['/plots']);
+    this.router.navigate( ['plots']);
   }
 
   addScene() {

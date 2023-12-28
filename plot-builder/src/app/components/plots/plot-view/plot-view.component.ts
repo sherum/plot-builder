@@ -4,6 +4,7 @@ import {PlotService} from "../../../plot.service";
 import {Location} from "@angular/common";
 import {IPlot} from "../../../plot.model";
 import {DEFAULT_ID, uid4} from "../../../index";
+import {StoryService} from "../../../story.service";
 
 
 @Component({
@@ -18,7 +19,10 @@ export class PlotViewComponent implements OnInit {
   hx = new Array<IPlot>();
   parentId = "";
 
-  constructor(private route: ActivatedRoute, private router: Router, private plotService: PlotService, private location: Location) {
+
+
+
+  constructor(private route: ActivatedRoute, private router: Router, private plotService: PlotService, private location: Location,private storyService:StoryService) {
   }
 
   ngOnInit(): void {
@@ -36,8 +40,10 @@ export class PlotViewComponent implements OnInit {
     if (this.cursor > 0) {
       this.cursor -= 1;
       this.plot = this.hx[this.cursor]
+      this,this.plotService.currentPlot.set(this.plot);
     } else {
       this.plot = this.hx[0]
+      this.plotService.currentPlot.set(this.plot);
     }
 
   }
@@ -46,18 +52,27 @@ export class PlotViewComponent implements OnInit {
     if (this.hx.length > this.cursor - 1) {
       this.cursor += 1;
       this.plot = this.hx[this.cursor]
+      this.plotService.currentPlot.set(this.plot);
     } else {
       this.plot = this.hx[this.cursor];
+      this.plotService.currentPlot.set(this.plot);
     }
   }
 
+
+  omniView(plot:IPlot){
+    this.plotService.currentPlot.set(plot);
+    this.router.navigate(['/omni/plot',plot.id]);
+    console.log("Omni nav ",plot.id);
+
+  }
   addSubplot() {
-    let newSubplot:IPlot = {
-      name:"new sub",
-      id:uid4(),
-      parentId:this.plot.id,
-      type:'new type',
-      description:'new plot'
+    let newSubplot: IPlot = {
+      name: "new sub",
+      id: uid4(),
+      parentId: this.plot.id,
+      type: 'new type',
+      description: 'new plot'
     }
     this.plot.subplots.push(newSubplot);
 
@@ -74,27 +89,32 @@ export class PlotViewComponent implements OnInit {
 
   }
 
-  addEvent(){
-    this.router.navigate(['event',DEFAULT_ID]);
+  addEvent() {
+    console.log("add event")
+    this.plotService.currentPlot.set(this.plot);
+    this.router.navigate(['/plots','event', DEFAULT_ID]);
   }
 
   selectPlot(plot) {
+    this.plotService.currentPlot.set(plot);
     this.plot = plot
     this.hx = [];
     this.cursor = 0;
 
   }
 
-  updatePlotTree(plot:IPlot){
+  updatePlotTree(plot: IPlot) {
     let parentId = plot.parentId;
-    console.log("subplot parentId",parentId);
-    this.plotService.savePlotTree(parentId,plot).subscribe(data => this.plot = data);
+    console.log("subplot parentId", parentId);
+    this.plotService.savePlotTree(parentId, plot).subscribe(data => {
+      this.plot = data;
+      this.plotService.currentPlot.set(this.plot);
+    });
     // if(plot.id == plot.parentId){
     //   this.plotService.updatePlot(plot)
     // }
     // this.plotService.savePlot(parentId,plot).subscribe(data =>this.plot = data);
   }
-
 
 
 }

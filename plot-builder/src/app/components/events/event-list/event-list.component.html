@@ -1,0 +1,18 @@
+<h4> Event List</h4>
+<table class="table">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let event of events|async ">
+    <!--          <td><a class="link" [routerLink]="['/plots',plot.id]">{{plot.name}}</a></td>-->
+    <td><a class="link" (click)="select(event)">{{event.name}}</a></td>
+    <td>{{event.type}}</td>
+  </tr>
+  </tbody>
+
+
+</table>

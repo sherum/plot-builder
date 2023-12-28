@@ -20,16 +20,6 @@ export class PlotDetailComponent implements OnInit {
 
   ngOnInit() {
 
-
-    // this.route.paramMap.subscribe(
-    //   param =>{
-    //     this.parentId  = param.get('id');
-    //    // this.plot = this.plotService.currentPlot();
-    //
-    //   }
-    // )
-
-
   }
 
 

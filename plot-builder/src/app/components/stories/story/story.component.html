@@ -1,5 +1,34 @@
+<div class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="plots" routerLinkActive="active">Plots</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="scenes" routerLinkActive="active">Scenes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="persons" routerLinkActive="active" >People</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="events" routerLinkActive="active" >Events</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="locations" routerLinkActive="active">Locations</a>
+            <!--        </li>-->
+          <li class="nav-item">
+            <a class="nav-link" routerLink="things" routerLinkActive="active">Things</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 <div class="container">
-  <form #form=ngForm>
+  <form class="my-5" #form=ngForm>
 
 
     <div class="input-group mb-3">
@@ -41,43 +70,92 @@
     <button class="btn btn-success" type="button" (click)="save()">Save</button>
   </form>
 
-  <div class="row my-2">
-    <div class="col">
-    <button (click)="addPlot()" type="button" class="btn btn-sm btn-primary">Add Plot</button>
-      <table class="table">
-        <label>Plots</label>
-        <thead>
-        <tr>
-          <th>Name</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let plot of story.plots">
-          <td><a class="link" (click)="selectPlot(plot)"> {{plot.name}}</a></td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-<hr/>
-      <div class="col">
-     <button routerLink="scene" type="button" class="btn btn-sm btn-primary">Add Scene</button>
-        <table class="table">
-          <label>Scenes</label>
-          <thead>
-          <tr>
-            <th>Name</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let scene of story.scenes">
-            <td>{{scene.name}}</td>
-          </tr>
-          </tbody>
-        </table>
+<!--  <table class="table">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--      <th>Name</th>-->
 
-      </div>
-    </div>
 
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr *ngFor="let plot of story.plots">-->
+<!--      <app-plot-loop [plotlist]="plot.subplots" *ngIf="plot.subplots"></app-plot-loop>-->
+<!--      &lt;!&ndash;      <td><a class="link" [routerLink]="[plot.id]">{{plot.name}}</a></td>&ndash;&gt;-->
+<!--    </tr>-->
+<!--    </tbody>-->
+
+
+
+<!--  </table>-->
+
+<!--</div>-->
+
+  <div class="col-md-6">
+    <router-outlet></router-outlet>
   </div>
+
+<!--  -->
+<!--  <div class="col-md-6" *ngFor="let plot of story.plots">-->
+
+<!--    <table class="table">-->
+<!--      <thead>-->
+<!--      <tr>-->
+<!--        <th>Name</th>-->
+
+
+<!--      </tr>-->
+<!--      <tbody>-->
+<!--      <tr>-->
+<!--        <td><a class="link" [routerLink]="[plot.id]">{{plot.name}}</a></td>-->
+<!--      </tr>-->
+<!--      </tbody>-->
+
+
+
+<!--    </table>-->
+<!--  </div>-->
+<!--  -->
+
+
+<!--  <div class="row my-2">-->
+<!--    <div class="col">-->
+<!--    <button (click)="addPlot()" type="button" class="btn btn-sm btn-primary">Add Plot</button>-->
+<!--      <table class="table">-->
+<!--        <label>Plots</label>-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--          <th>Name</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr *ngFor="let plot of story.plots">-->
+<!--&lt;!&ndash;          <td><a class="link" (click)="selectPlot(plot)"> {{plot.name}}</a></td>&ndash;&gt;-->
+<!--            <td><a class="link" routerLink="plots"> {{plot.name}}</a></td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--      </table>-->
+<!--    </div>-->
+<!--<hr/>-->
+<!--      <div class="col">-->
+<!--     <button routerLink="scene" type="button" class="btn btn-sm btn-primary">Add Scene</button>-->
+<!--        <table class="table">-->
+<!--          <label>Scenes</label>-->
+<!--          <thead>-->
+<!--          <tr>-->
+<!--            <th>Name</th>-->
+<!--          </tr>-->
+<!--          </thead>-->
+<!--          <tbody>-->
+<!--          <tr *ngFor="let scene of story.scenes">-->
+<!--            <td>{{scene.name}}</td>-->
+<!--          </tr>-->
+<!--          </tbody>-->
+<!--        </table>-->
+
+<!--      </div>-->
+<!--    </div>-->
+
+<!--  </div>-->
 
 <router-outlet></router-outlet>

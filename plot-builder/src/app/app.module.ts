@@ -17,6 +17,16 @@ import { StoryEditComponent } from './components/stories/story-edit/story-edit.c
 import { ProfileComponent } from './components/profiles/profile/profile.component';
 import { PlotDetailComponent } from './components/plots/plot-detail/plot-detail.component';
 import {SubplotComponent} from "./components/plots/plot-subplot/subplot.component";
+import {EventComponent} from "./components/events/event/event.component";
+import {EventListComponent} from "./components/events/event-list/event-list.component";
+import {OmniListComponent} from "./components/omni/omni-list/omni-list.component";
+import {PersonElementComponent} from "./components/persons/person-element/person-element.component";
+import {PersonListComponent} from "./components/persons/person-list/person-list.component";
+import {ThingListComponent} from "./components/things/thing-list/thing-list.component";
+import {ThingElementComponent} from "./components/things/thing-element/thing-element.component";
+import {EventElementComponent} from "./components/events/event-element/event-element.component";
+import {AltPlotElementComponent} from "./components/plots/alt-plot-element/alt-plot-element.component";
+import {PlotLoopComponent} from "./components/plots/plot-loop/plot-loop.component";
 
 
 @NgModule({
@@ -32,7 +42,18 @@ import {SubplotComponent} from "./components/plots/plot-subplot/subplot.componen
     StoryEditComponent,
     ProfileComponent,
     PlotDetailComponent,
-    SubplotComponent
+    SubplotComponent,
+    EventComponent,
+    EventListComponent,
+    OmniListComponent,
+    PersonElementComponent,
+    PersonListComponent,
+    ThingListComponent,
+    ThingElementComponent,
+    EventListComponent,
+    EventElementComponent,
+    AltPlotElementComponent,
+    PlotLoopComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +63,9 @@ import {SubplotComponent} from "./components/plots/plot-subplot/subplot.componen
     AppRoutingModule
   ],
   providers: [],
+  exports: [
+    PlotListComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

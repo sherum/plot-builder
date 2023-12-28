@@ -1,19 +1,58 @@
 <div class="container">
-  <table class="table">
-    <thead>
-    <tr>
-      <th>Name</th>
-      <th>Delete</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let plot of plotlist">
-      <td><a class="link" (click)="detailView(plot)">{{plot.name}}</a></td>
-      <td>Delete</td>
-    </tr>
-    </tbody>
+
+  <div class="col-md-2">
+    <button type="button" class="btn btn-outline-success" routerLink="new">Add Plot</button>
+  </div>
+
+  <div class="col-md-6">
+
+    <div class="col-md-6" *ngFor="let plot of plotlist">
+
+      <table class="table" >
+        <thead>
+        <tr>
+          <th>Name</th>
 
 
-  </table>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><a class="link" [routerLink]="[plot.id]">{{plot.name}}</a></td>
+          <app-plot-loop [plotlist]="plot.subplots"  ></app-plot-loop>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  <div class="col-md-6">
+  <router-outlet></router-outlet>
 </div>
+
+{{listLength}}
+
+<!--  <table class="table">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--      <th>Name</th>-->
+
+
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr *ngFor="let plot of plotlist">-->
+
+<!--            <app-plot-loop [plotlist]="plot.subplots" *ngIf="plot.subplots"></app-plot-loop>-->
+<!--&lt;!&ndash;      <td><a class="link" [routerLink]="[plot.id]">{{plot.name}}</a></td>&ndash;&gt;-->
+<!--    </tr>-->
+<!--    </tbody>-->
+
+
+
+<!--  </table>-->
+
+<!--  </div>-->
+
+<!--</div>-->
+
 

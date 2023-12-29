@@ -18,12 +18,8 @@ export class EventListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params=>{
-      let id = params['parentId'];
 
-      console.log("Events id", id);
-      this.plotService.getPlot(id).subscribe(iplot => this.events = iplot.events)
-    })
+    console.log("Events",this.events);
   }
 
   select(event) {

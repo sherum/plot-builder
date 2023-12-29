@@ -1,7 +1,7 @@
 import { Component,OnInit} from '@angular/core';
 import {PlotService} from "../../../plot.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {IPlot} from "../../../plot.model";
+import {IEvent, IPlot} from "../../../plot.model";
 
 @Component({
   selector: 'app-alt-plot-element',
@@ -15,8 +15,7 @@ export class AltPlotElementComponent implements OnInit{
     description: 'plot description',
     id: "new",
   };
-  subplots:Array<any>;
-  events:Array<any>;
+  events:IEvent[];
   storyId ="";
 
   constructor(private plotService: PlotService, private route: ActivatedRoute, private router: Router) {
@@ -25,15 +24,12 @@ export class AltPlotElementComponent implements OnInit{
   ngOnInit() {
     this.route.params.subscribe(params => {
       let id = params['plotId'];
-      if (id != 'new') {
         this.plotService.getPlot(id).subscribe(iplot => {
           this.plot = iplot;
-          this.subplots = iplot.subplots;
           this.events = iplot.events;
           console.log("this plot",this.plot);
         });
-
-      }else{
+      if (id =='new') {
         this.plot = {
           name: 'new',
           type: 'Character',
@@ -63,7 +59,7 @@ export class AltPlotElementComponent implements OnInit{
   }
 
 
-  select(event){
+  selectEvent(event){
     this.router.navigate([event.id]);
   }
 }

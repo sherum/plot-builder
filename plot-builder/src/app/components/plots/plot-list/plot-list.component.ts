@@ -13,7 +13,7 @@ export class PlotListComponent implements OnInit {
 
 //@Input() plotlist:IPlot[];
   plotlist;
-  listLength;
+
 
 
   constructor(private route: ActivatedRoute, private router: Router, private plotService: PlotService, private storyService: StoryService) {
@@ -22,11 +22,7 @@ export class PlotListComponent implements OnInit {
   ngOnInit(): void {
     let sid = this.route.snapshot.params['id'];
     this.plotService.getStory(sid).subscribe(story => this.plotlist = story.plots);
-   if(this.plotlist.plots.length){
-     this.listLength = "not zero"
-   }else{
-     this.listLength= 'gaybj'
-   };
+
   }
 
   detailView(plot: IPlot) {

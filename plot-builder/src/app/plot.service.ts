@@ -132,6 +132,12 @@ export class PlotService {
     let uri = `${this.endpoint}/plot/${id}`;
     return this.http.get<IPlot>(uri, {headers: this.headers});
   }
+  getEvent(eid: string,pid: string): Observable<IEvent> {
+
+    let uri = `${this.endpoint}/plot/event/${pid}/${eid}`;
+    console.log("Get event clicked Service call uri: ",uri);
+    return this.http.get<IEvent>(uri, {headers: this.headers});
+  }
 
 
 }

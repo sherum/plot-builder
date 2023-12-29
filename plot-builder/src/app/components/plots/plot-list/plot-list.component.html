@@ -3,12 +3,10 @@
   <div class="col-md-2">
     <button type="button" class="btn btn-outline-success" routerLink="new">Add Plot</button>
   </div>
+ <div class="row">
+    <div class="col-md-3" >
 
-  <div class="col-md-6">
-
-    <div class="col-md-6" *ngFor="let plot of plotlist">
-
-      <table class="table" >
+      <table class="table">
         <thead>
         <tr>
           <th>Name</th>
@@ -17,9 +15,9 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td><a class="link" [routerLink]="[plot.id]">{{plot.name}}</a></td>
-          <app-plot-loop [plotlist]="plot.subplots"  ></app-plot-loop>
+        <tr *ngFor="let plot of plotlist">
+          <td><button type="button" class="btn btn-sm btn-outline-success" [routerLink]="[plot.id]">{{plot.name}}</button></td>
+          <app-plot-loop [plotlist]="plot.subplots" ></app-plot-loop>
         </tr>
         </tbody>
       </table>
@@ -28,8 +26,8 @@
   <div class="col-md-6">
   <router-outlet></router-outlet>
 </div>
+  </div>
 
-{{listLength}}
 
 <!--  <table class="table">-->
 <!--    <thead>-->
@@ -56,3 +54,4 @@
 <!--</div>-->
 
 
+</div>

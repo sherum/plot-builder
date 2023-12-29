@@ -2,7 +2,7 @@
 
   <div class="row">
     <h5>Plot Builder</h5>
-    <div class="col-md-6">
+    <div class="col-md-12">
       <form #form=ngForm>
         <div class="row">
 
@@ -45,14 +45,16 @@
 <!--          [subplots]="plot.subplots"-->
 <!--          (selectedPlot)="select($event)"></app-plot-subplot>-->
 <!--        </div>-->
-        <div class="col-md-3">
-          <app-event-list
-          [events]="plot.events"></app-event-list>
+        <div class="col-md-12">
+          <app-event-list *ngIf="plot.events"
+          [events]="plot.events"
+          (select)="selectEvent($event)"></app-event-list>
 
         </div>
 
+
   </div>
-  <div class="row">
+  <div class="row" *ngIf="plot.events">
     <router-outlet></router-outlet>
   </div>
 </div>

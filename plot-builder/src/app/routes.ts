@@ -27,7 +27,7 @@ export const alt_routes: Routes = [
                     {
                         path: ':plotId', component: AltPlotElementComponent, children: [
                             // {path: ':subplotId', component: AltPlotElementComponent},
-                            // {path: ':eventId', component: EventElementComponent}
+                            {path: 'event/:eventId', component: EventElementComponent}
                         ]
                     },
                     {path: 'scenes', component: SceneListComponent, children: [{path: ':sceneId', component: SceneElementComponent}]},

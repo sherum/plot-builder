@@ -144,5 +144,11 @@ export class PlotService {
     return this.http.get<ILocation>(uri,{headers:this.headers});
   }
 
+  saveLocation(eventId:string,location:ILocation):Observable<ILocation>{
+    let uri = `${this.endpoint}/event/${eventId}/location`;
+    return this.http.post<ILocation>(uri,location,{headers:this.headers})
+
+  }
+
 
 }

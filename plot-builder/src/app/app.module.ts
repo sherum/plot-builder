@@ -28,6 +28,9 @@ import {EventElementComponent} from "./components/events/event-element/event-ele
 import {AltPlotElementComponent} from "./components/plots/alt-plot-element/alt-plot-element.component";
 import {PlotLoopComponent} from "./components/plots/plot-loop/plot-loop.component";
 
+import {LocationListComponent} from "./components/locations/location-list/location-list.component";
+import {LocationElementComponent} from "./components/locations/location-element/location-element.component";
+
 
 @NgModule({
   declarations: [
@@ -53,7 +56,9 @@ import {PlotLoopComponent} from "./components/plots/plot-loop/plot-loop.componen
     EventListComponent,
     EventElementComponent,
     AltPlotElementComponent,
-    PlotLoopComponent
+    PlotLoopComponent,
+    LocationElementComponent,
+    LocationListComponent
   ],
   imports: [
     BrowserModule,

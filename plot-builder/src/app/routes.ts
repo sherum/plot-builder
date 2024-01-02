@@ -16,32 +16,44 @@ import {ThingListComponent} from "./components/things/thing-list/thing-list.comp
 import {AltPlotElementComponent} from "./components/plots/alt-plot-element/alt-plot-element.component";
 
 export const alt_routes: Routes = [
-    {path: 'stories', component: StoryListComponent, children: [{path: 'edit/:id', component: StoryEditComponent}]},
+  {path: 'stories', component: StoryListComponent, children: [{path: 'edit/:id', component: StoryEditComponent}]},
 // {path: 'stories', component: StoryListComponent},
 
 
-    {
-        path: 'stories/story/:id', component: StoryComponent, children: [
-             {
-                path: 'plots', component: PlotListComponent, children: [
-                    {
-                        path: ':plotId', component: AltPlotElementComponent, children: [
-                            // {path: ':subplotId', component: AltPlotElementComponent},
-                            {path: 'event/:eventId', component: EventElementComponent}
-                        ]
-                    },
-                    {path: 'scenes', component: SceneListComponent, children: [{path: ':sceneId', component: SceneElementComponent}]},
+  {
+    path: 'stories/story/:id', component: StoryComponent, children: [
+      {
+        path: 'plots', component: PlotListComponent, children: [
+          {
+            path: ':plotId', component: AltPlotElementComponent, children: [
 
-                    {path: 'persons', component: PersonListComponent, children: [{path: ':personId', component: PersonElementComponent}]},
-
-                    {path: 'events', component: EventListComponent, children: [{path: ':eventId', component: EventElementComponent}]},
-
-                    {path: 'locations', component: LocationListComponent, children: [{path: ':locationId', component: LocationElementComponent}]},
-
-                    {path: 'things', component: ThingListComponent, children: [{path: ':thingId', component: ThingElementComponent}]},
-                ]
-            },
-
-
+              {path: 'event/:eventId', component: EventElementComponent},
+              {path: 'location/:locationId', component: LocationElementComponent},
+            ]
+          }
         ]
-    }]
+      },
+      {path: 'scenes', component: SceneListComponent, children: [{path: ':sceneId', component: SceneElementComponent}]},
+
+      {
+        path: 'persons',
+        component: PersonListComponent,
+        children: [{path: ':personId', component: PersonElementComponent}]
+      },
+
+      {path: 'events', component: EventListComponent, children: [{path: ':eventId', component: EventElementComponent}]},
+
+      {
+        path: 'locations',
+        component: LocationListComponent,
+        children: [{path: ':locationId', component: LocationElementComponent}]
+      },
+
+      {path: 'things', component: ThingListComponent, children: [{path: ':thingId', component: ThingElementComponent}]},
+    ]
+  },
+      {path:'location/:locationId', component:LocationElementComponent,outlet:'loc'}
+
+
+]
+

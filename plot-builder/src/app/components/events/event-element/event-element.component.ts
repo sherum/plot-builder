@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {IEvent} from "../../../plot.model";
+import {defaultLocation, IEvent, ILocation} from "../../../plot.model";
 import {PlotService} from "../../../plot.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-event-element',
@@ -10,27 +11,38 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class EventElementComponent implements OnInit {
   event: IEvent;
+  eid = "";
+  pid = "";
 
-  constructor(private plotService: PlotService, private route: ActivatedRoute, private router: Router) {
+  constructor(private plotService: PlotService, private route: ActivatedRoute, private router: Router, private location: Location) {
   }
 
   ngOnInit() {
-    let eid = "";
+
     this.route.params.subscribe(params => {
-      let pid = params['plotId'];
-      eid = params['eventId'];
-      this.plotService.getEvent(eid, pid).subscribe(ievent => this.event = ievent)
+      this.pid = params['plotId'];
+      this.eid = params['eventId'];
+      if (this.eid == 'new') {
+        this.event = this.getNew();
+      } else {
+        this.plotService.getEvent(this.eid, this.pid).subscribe(ievent => {
+          this.event = ievent;
+          // this.plotService.getLocation(ievent.locationId).subscribe(iloc => this.eventLocation = iloc);
+        })
+      }
     });
-    if (eid == 'new') {
-      this.event = {
-        id: 'new',
-        name: "event",
-        dtg: '1Jan 1997',
-        type: 'incident',
-        location: 'Dullus Airport',
-        description: "Two lovers meet.",
-      };
+  }
+
+  getNew(): IEvent {
+    let nevent = {
+      id: 'new',
+      name: "event",
+      dtg: '1 Jan 1997:1400',
+      type: 'incident',
+      location: defaultLocation,
+      description: "Two lovers meet.",
     }
+    return nevent;
 
   }
 
@@ -38,11 +50,13 @@ export class EventElementComponent implements OnInit {
     this.event.name = form.value.name;
     this.event.type = form.value.type;
     this.event.dtg = form.value.dtg;
-    this.event.location = form.value.location;
+    //this.event.location = form.value.location;
     this.event.description = form.value.description
 
-    // this.plotService.saveEvent(this.event).subscribe(
-    //   eventted => console.log("saved event", eventted)
-    // );
+    this.plotService.saveEvent(this.pid, this.event).subscribe(
+      eventted => {
+        this.location.back()
+      }
+    );
   }
 }

@@ -1,10 +1,10 @@
-export interface IEvent{
-  id:string;
-  name:string;
-  dtg:string;
-  type?:string;
-  location?:string;
-  description?:string;
+export interface IEvent {
+  id: string;
+  name: string;
+  dtg: string;
+  type?: string;
+  location: ILocation;
+  description?: string;
 }
 
 import {DEFAULT_ID} from "./index";
@@ -12,12 +12,12 @@ import {DEFAULT_ID} from "./index";
 export interface IPlot {
   name: string;
   id?: string;
-  parentId?:string;
+  parentId?: string;
   description?: string;
   type?: string;
   subplots?: IPlot[];
-  events?:IEvent[];
-  scenes?:[];
+  events?: IEvent[];
+  scenes?: [];
 }
 
 export interface IScene {
@@ -25,16 +25,28 @@ export interface IScene {
   dtg: string;
   name: string;
   setting: string;
-  plotPoints:string;
+  plotPoints: string;
   summary: string;
-  location:string;
-  things:[];
-  events:[];
-  people:[]
-  plot:IPlot;
+  location: string;
+  things: [];
+  events: [];
+  people: []
+  plot: IPlot;
 }
 
+export interface ILocation {
+  name: string;
+  id?: string;
+  description?: string;
+  events?: IEvent[];
+  scenes?: IScene[];
+}
 
+export const defaultLocation: ILocation = {
+  "name": "undefined loc",
+  "id": "new",
+  "description": "new location"
+}
 
 export interface IStory {
   id: string;
@@ -48,12 +60,12 @@ export interface IStory {
 
   summary: string;
 
-  plots: Array<IPlot|null>;
-  scenes: Array<IScene|null>;
+  plots: Array<IPlot | null>;
+  scenes: Array<IScene | null>;
 }
 
-export const defautStory:IStory = {
-  "id":"A",
+export const defautStory: IStory = {
+  "id": "A",
   "author": "new author",
   "title": "new title",
   "genre": "new genre",
@@ -62,16 +74,27 @@ export const defautStory:IStory = {
   "plots": new Array<IPlot>(),
   "scenes": new Array<IScene>()
 }
-export const defautEvents:IEvent[] =[{
+export const defautEvents: IEvent[] = [{
 
   "description": "New event",
   "id": DEFAULT_ID,
-  "dtg":"22 Jun 2026: 1400",
+  "dtg": "22 Jun 2026: 1400",
   "name": "Test Anomaly",
-  "type": "incident"
+  "type": "incident",
+  "location":defaultLocation
 }]
 
-export const defaultPlots:IPlot[] = [
+export const defaultEvent: IEvent = {
+
+  "description": "New event",
+  "id": 'new',
+  "dtg": "22 Jun 2026: 1400",
+  "name": "Plot Event",
+  "type": "incident, event, season",
+  "location":defaultLocation
+}
+
+export const defaultPlots: IPlot[] = [
   {
     "description": "An investigation into a specious air disaster creates more questions than it answers as the evidence pushes  progressively more inexplicable root causes.",
     "id": "AA",

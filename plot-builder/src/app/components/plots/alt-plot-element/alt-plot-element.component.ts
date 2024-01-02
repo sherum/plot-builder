@@ -1,7 +1,7 @@
 import { Component,OnInit} from '@angular/core';
 import {PlotService} from "../../../plot.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {IEvent, IPlot} from "../../../plot.model";
+import {defaultEvent, IEvent, IPlot} from "../../../plot.model";
 
 @Component({
   selector: 'app-alt-plot-element',
@@ -58,7 +58,11 @@ export class AltPlotElementComponent implements OnInit{
     );
   }
 
+ createEvent(){
+    this.events.push(defaultEvent);
 
+   //display the router outlet
+ }
   selectEvent(event){
     this.router.navigate([event.id]);
   }

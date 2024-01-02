@@ -24,6 +24,7 @@ export class EventComponent implements OnInit{
       type: form.value.type,
       dtg: form.value.dtg,
       id: form.value.id,
+      location:this.event.location,
       description: form.value.description
     }
     console.log("Event", update);

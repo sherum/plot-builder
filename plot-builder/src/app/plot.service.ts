@@ -1,5 +1,5 @@
 import {Injectable, signal} from '@angular/core';
-import {defaultPlots, defautStory, IEvent, IPlot, IScene, IStory, defautEvents} from "./plot.model";
+import {defaultPlots, defautStory, IEvent, IPlot, IScene, IStory, defautEvents, ILocation} from "./plot.model";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable, Subject} from "rxjs";
 import {DEFAULT_ID} from "./index";
@@ -66,9 +66,9 @@ export class PlotService {
   }
 
 
-  saveEvent(plotId:string,event:IEvent):Observable<IEvent>{
-    let uri = `${this.endpoint}/event/save/${plotId}`;
-    return this.http.post<IEvent>(uri,event,{headers:this.headers})
+  saveEvent(plotId:string,event:IEvent):Observable<IPlot>{
+    let uri = `${this.endpoint}/plot/event/save/${plotId}`;
+    return this.http.post<IPlot>(uri,event,{headers:this.headers})
   }
 
   getEvents(plotId:string):Observable<IEvent[]>{
@@ -137,6 +137,11 @@ export class PlotService {
     let uri = `${this.endpoint}/plot/event/${pid}/${eid}`;
     console.log("Get event clicked Service call uri: ",uri);
     return this.http.get<IEvent>(uri, {headers: this.headers});
+  }
+
+  getLocation(id:string):Observable<ILocation>{
+    let uri = `${this.endpoint}/location/${id}`;
+    return this.http.get<ILocation>(uri,{headers:this.headers});
   }
 
 

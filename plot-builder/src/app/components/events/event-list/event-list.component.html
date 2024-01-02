@@ -7,7 +7,7 @@
       <tr>Events List</tr>
       <tr>
         <th>Name</th>
-        <th>Type</th>
+        <th>Location</th>
       </tr>
       </thead>
       <tbody>
@@ -16,7 +16,8 @@
         <!--          <td><a class="link" [routerLink]="['/plots',plot.id]">{{plot.name}}</a></td>-->
 <!--            <td><a class="link" (click)="select(event)">{{event.name}}</a></td>-->
         <td><a class="link" [routerLink]="['event',event.id]" >{{event.name}}</a></td>
-        <td>{{event.type}}</td>
+        <td *ngIf="event.location"><a class="link" [routerLink]="['location',event.location.id]">{{event.location.name}}</a></td>
+       <td *ngIf="!event.location"><a class="link" [routerLink]="['location/new']">Add Location</a></td>
       </tr>
       </tbody>
 
@@ -25,5 +26,6 @@
   </div>
   <div class="row">
     <router-outlet></router-outlet>
+
   </div>
 </div>

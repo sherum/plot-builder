@@ -1,5 +1,6 @@
 import {Component, effect, OnInit} from '@angular/core';
 import {PlotService} from "./plot.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ export class AppComponent implements OnInit{
   isAuthenticated = true;
   story = true;
 
-  constructor(private plotService:PlotService) {
+  constructor(private plotService:PlotService,private router:Router) {
   }
 
   ngOnInit() {
@@ -19,6 +20,8 @@ export class AppComponent implements OnInit{
   }
 
   signOut(){
+    this.isAuthenticated = true;
+    this.router.navigate(['stories'])
 
   }
 }

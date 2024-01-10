@@ -1,6 +1,6 @@
 import {Injectable, signal} from '@angular/core';
 import {defaultPlots, defautStory, IEvent, IPlot, IScene, IStory, defautEvents, ILocation} from "./plot.model";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Observable, Subject} from "rxjs";
 import {DEFAULT_ID} from "./index";
 
@@ -150,5 +150,15 @@ export class PlotService {
 
   }
 
+  updateEvent(event:IEvent):Observable<IEvent>{
+    let uri = `${this.endpoint}/event`;
+    console.log("Update event from plotservice", event);
+     return this.http.post<IEvent>(uri,event,{headers:this.headers})
+  }
+
+  deletePlot(plotId:string){
+    let uri = `${this.endpoint}/plot/${plotId}`;
+    this.http.delete(uri,{headers:this.headers}).subscribe((resp=>console.log("plot deleted",resp)));
+  }
 
 }

@@ -30,6 +30,8 @@ import {PlotLoopComponent} from "./components/plots/plot-loop/plot-loop.componen
 
 import {LocationListComponent} from "./components/locations/location-list/location-list.component";
 import {LocationElementComponent} from "./components/locations/location-element/location-element.component";
+import {NavBarComponent} from "./nav-bar/nav-bar.component";
+
 
 
 @NgModule({
@@ -57,8 +59,10 @@ import {LocationElementComponent} from "./components/locations/location-element/
     EventElementComponent,
     AltPlotElementComponent,
     PlotLoopComponent,
+    NavBarComponent,
     LocationElementComponent,
-    LocationListComponent
+    LocationListComponent,
+
   ],
   imports: [
     BrowserModule,

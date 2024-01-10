@@ -3,7 +3,7 @@ export interface IEvent {
   name: string;
   dtg: string;
   type?: string;
-  location: ILocation;
+  location?: ILocation;
   description?: string;
 }
 

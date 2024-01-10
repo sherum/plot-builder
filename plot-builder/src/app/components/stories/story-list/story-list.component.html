@@ -1,4 +1,4 @@
-
+<app-nav-bar></app-nav-bar>
 
 <div class="container">
 <button type="button" class="btn btn-primary" (click)="createStory()">Create Story</button>
@@ -17,7 +17,7 @@
       <tbody>
         <tr *ngFor="let story of storyList|async">
 <!--        <td><a (click)="selectStory(story)" class="link">{{story.title}}</a> </td>-->
-          <td><a [routerLink]="['/stories/story',story.id]" class="link">{{story.title}}</a> </td>
+          <td><a [routerLink]="['story',story.id]" class="link">{{story.title}}</a> </td>
         <td>{{story.author}}</td>
         <td>{{story.genre}}</td>
 <!--          <td><a [routerLink]="['/stories/story',story.id]" class="link">Details</a> </td>-->

@@ -1,52 +1,53 @@
-<div class="container-fluid">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
-              aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <a class="navbar-brand" href="#">The Writers' Sauce</a>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/about" routerLinkActive="active">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/signUp" routerLinkActive="active" *ngIf="!isAuthenticated">Sign up</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/profile" routerLinkActive="active" *ngIf="isAuthenticated">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/omni" routerLinkActive="active">Omni</a>
-            <!--        </li>-->
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/stories" routerLinkActive="active">Stories</a>
-          </li>
+<!--<div class="container-fluid">-->
+<!--  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">-->
+<!--    <div class="container-fluid">-->
+<!--      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"-->
+<!--              aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--        <span class="navbar-toggler-icon"></span>-->
+<!--      </button>-->
+<!--      <a class="navbar-brand" href="#">The Writers' Sauce</a>-->
+<!--      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">-->
+<!--        <ul class="navbar-nav me-auto mb-2 mb-lg-0">-->
+<!--          <li class="nav-item">-->
+<!--            <a class="nav-link" routerLink="home" routerLinkActive="active">Home</a>-->
+<!--          </li>-->
+<!--          <li class="nav-item">-->
+<!--            <a class="nav-link" routerLink="about" routerLinkActive="active">About</a>-->
+<!--          </li>-->
+<!--          <li class="nav-item">-->
+<!--            <a class="nav-link" routerLink="signUp" routerLinkActive="active" *ngIf="!isAuthenticated">Sign up</a>-->
+<!--          </li>-->
+<!--          <li class="nav-item">-->
+<!--            <a class="nav-link" routerLink="profile" routerLinkActive="active" *ngIf="isAuthenticated">Profile</a>-->
+<!--          </li>-->
+<!--          <li class="nav-item">-->
+<!--            <a class="nav-link" routerLink="omni" routerLinkActive="active">Omni</a>-->
+<!--            &lt;!&ndash;        </li>&ndash;&gt;-->
+<!--          <li class="nav-item">-->
+<!--            <a class="nav-link" routerLink="stories" routerLinkActive="active">Stories</a>-->
+<!--          </li>-->
 
 
 
-        </ul>
-        <!--      <form class="d-flex" role="search">-->
-        <!--        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
-        <!--        <button class="btn btn-outline-success" type="submit">Search</button>-->
-        <!--      </form>-->
-        <div class="d-flex">
-          <li class="nav-item">
-            <a class="btn btn-danger" routerLink="" (click)="signOut()" *ngIf="isAuthenticated">Sign out</a>
-          </li>
-        </div>
-        <div *ngIf="!isAuthenticated">
+<!--        </ul>-->
+<!--        &lt;!&ndash;      <form class="d-flex" role="search">&ndash;&gt;-->
+<!--        &lt;!&ndash;        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">&ndash;&gt;-->
+<!--        &lt;!&ndash;        <button class="btn btn-outline-success" type="submit">Search</button>&ndash;&gt;-->
+<!--        &lt;!&ndash;      </form>&ndash;&gt;-->
+<!--        <div class="d-flex">-->
+<!--          <li class="nav-item">-->
+<!--            <a class="btn btn-danger" routerLink="" (click)="signOut()" *ngIf="isAuthenticated">Sign out</a>-->
+<!--          </li>-->
+<!--        </div>-->
+<!--        <div *ngIf="!isAuthenticated">-->
 
-          <app-sign-in></app-sign-in>
-        </div>
-      </div>
-    </div>
-  </nav>
+<!--          <app-sign-in></app-sign-in>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </nav>-->
+<!--</div>-->
+<button *ngIf="!isAuthenticated" class="btn btn-success" (click)="signOut()">Sign In</button>
 
-  <router-outlet></router-outlet>
-</div>
 
+<router-outlet></router-outlet>

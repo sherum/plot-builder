@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {defaultLocation, IEvent, ILocation} from "../../../plot.model";
+import {defaultEvent, defaultLocation, IEvent, ILocation} from "../../../plot.model";
 import {PlotService} from "../../../plot.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Location} from "@angular/common";
+import {DEFAULT_ID, uid4} from "../../../index";
 
 @Component({
   selector: 'app-event-element',
@@ -34,8 +35,10 @@ export class EventElementComponent implements OnInit {
   }
 
   getNew(): IEvent {
+
+    this.eid = DEFAULT_ID;
     let nevent = {
-      id: 'new',
+      id: DEFAULT_ID,
       name: "event",
       dtg: '1 Jan 1997:1400',
       type: 'incident',
@@ -51,11 +54,14 @@ export class EventElementComponent implements OnInit {
     this.event.type = form.value.type;
     this.event.dtg = form.value.dtg;
     //this.event.location = form.value.location;
-    this.event.description = form.value.description
+    this.event.description = form.value.description;
+    //this.event.id != d?this.event.id:uid4();
 
-    this.plotService.saveEvent(this.pid, this.event).subscribe(
+    console.log("Event id after save",this.event.id);
+    this.plotService.updateEvent(this.event).subscribe(
       eventted => {
-        this.location.back()
+        this.event = eventted;
+        this.location.back();
       }
     );
   }

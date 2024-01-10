@@ -1,7 +1,8 @@
-<div class="container my-3">
+<div class="container my-3" *ngIf="event">
 
   <div class="row">
-    <h5>Event</h5>
+    <h4>Event:</h4>
+    <h5>{{event.name}}</h5>
     <div class="col-md-12">
       <form #form=ngForm>
         <div class="row">
@@ -21,12 +22,12 @@
         <div class="form-group" [hidden]="true">
           <label class="form-label">Id</label>
           <input name="id" class="form-control" type="text" [ngModel]="event.id"/>
-        </div>
+         </div>
 
         <div class="form-group">
           <label class="form-label">Location</label>
           <!--          <input name="location" class="form-control" type="text" [ngModel]="eventLocation.name"/>-->
-          <a type="link" [routerLink]="['location',event.location.id]">{{event.location?.name}}</a>
+          <a type="link" [routerLink]="['location',event?.location?.id,'event',event.id]">{{event?.location?.name}}</a>
         </div>
         <div class="form-group">
           <label class="form-label">Date/Time</label>
@@ -44,3 +45,5 @@
     </div>
 
     <router-outlet></router-outlet>
+  </div>
+</div>

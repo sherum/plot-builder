@@ -1,4 +1,3 @@
-
 import {Component, OnInit} from '@angular/core';
 import {PlotService} from "../../../plot.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -11,34 +10,43 @@ import {NgForm} from "@angular/forms";
   styleUrls: ['./story-edit.component.css']
 })
 
-export class StoryEditComponent implements OnInit{
+export class StoryEditComponent implements OnInit {
 
-  story:IStory = defautStory;
+  story: IStory = defautStory;
   new = true;
 
-  constructor(private plotService:PlotService,private route:ActivatedRoute,private router:Router) {
+  constructor(private plotService: PlotService, private route: ActivatedRoute, private router: Router) {
   }
 
-  ngOnInit(){
-    this.route.params.subscribe(
-      data => {
-        let id  = data['id'];
+  ngOnInit() {
 
-        this.plotService.getStory(id).subscribe(storee => this.story = storee);
+    this.route.queryParams.subscribe(params => {
+      this.new = params['new'];
+        if (!this.new) {
+          this.route.params.subscribe(
+            data => {
+              let id = data['id'];
+              this.plotService.getStory(id).subscribe(storee => this.story = storee);
 
+            }
+          )
+        }
+        // else {
+        //   this.story = defautStory
+        // }
       }
     );
-
-    this.route.queryParams.subscribe(params => this.new = params['new'])
   }
 
 
-  save(form:NgForm){
+  save(form: NgForm) {
     this.story.author = form.value.author;
     this.story.title = form.value.title;
     this.story.genre = form.value.genre;
     this.story.maguffin = form.value.maguffin;
     this.story.summary = form.value.summary;
+    this.story.id = '94423984-fb5c-44fb-ba5e-6d3bb6737ba3';
+    console.log("story data after mapping:",this.story);
     this.plotService.updateCurrentStory(this.story);
     this.plotService.saveStory();
     this.router.navigate(['stories']);

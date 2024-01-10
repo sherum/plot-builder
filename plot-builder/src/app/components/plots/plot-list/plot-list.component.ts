@@ -13,6 +13,7 @@ export class PlotListComponent implements OnInit {
 
 //@Input() plotlist:IPlot[];
   plotlist;
+  storyId= '';
 
 
 
@@ -21,6 +22,7 @@ export class PlotListComponent implements OnInit {
 
   ngOnInit(): void {
     let sid = this.route.snapshot.params['id'];
+    this.storyId = sid;
     this.plotService.getStory(sid).subscribe(story => this.plotlist = story.plots);
 
   }

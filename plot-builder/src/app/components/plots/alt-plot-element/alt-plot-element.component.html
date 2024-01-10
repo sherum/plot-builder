@@ -15,11 +15,6 @@
             <label class="form-label mx-2">Plot Type</label>
             <input class="form-control" aria-label="plot type" [(ngModel)]="plot.type" name="type"/>
 
-            <!--        <option value="story">Story</option>-->
-            <!--        <option value="character">Character</option>-->
-            <!--        <option value="event">Event</option>-->
-            <!--        <option value="location">Location</option>-->
-            <!--        <option value="thing">Thing</option>-->
 
 
           </div>
@@ -35,23 +30,26 @@
                     [ngModel]="plot.description"></textarea>
         </div>
         <button type="button" class="btn btn-outline-primary my-2 end" (click)="save(form)">Save</button>
- <button type="button" class="btn btn-outline-success m-2 end" (click)="createEvent()">Add Event</button>
+        <button type="button" class="btn btn-outline-warning m-2" (click)="createSubplot()">Add Subplot</button>
+        <button type="button" class="btn btn-outline-success m-2 end" (click)="createEvent()">Add Event</button>
+        <button type="button" class="btn btn-outline-danger m-2 end" (click)="deletePlot(plotId)">Delete Plot</button>
+
 
       </form>
     </div>
 
 
-<!--        <div class="col-md-3">-->
-<!--          <app-plot-subplot-->
-<!--          [subplots]="plot.subplots"-->
-<!--          (selectedPlot)="select($event)"></app-plot-subplot>-->
-<!--        </div>-->
-        <div class="col-md-12">
-          <app-event-list *ngIf="plot.events"
-          [events]="plot.events"
-          (select)="selectEvent($event)"></app-event-list>
+    <!--        <div class="col-md-3">-->
+    <!--          <app-plot-subplot-->
+    <!--          [subplots]="plot.subplots"-->
+    <!--          (selectedPlot)="select($event)"></app-plot-subplot>-->
+    <!--        </div>-->
+    <div class="col-md-12">
+      <app-event-list *ngIf="plot.events"
+                      [events]="plot.events"
+                      (select)="selectEvent($event)"></app-event-list>
 
-        </div>
+    </div>
 
 
   </div>

@@ -67,7 +67,8 @@ import { EventsAllComponent } from './components/events/events-all/events-all.co
         LocationElementComponent,
         LocationListComponent,
         EventViewComponent,
-        EventsAllComponent
+        EventsAllComponent,
+        ThingElementComponent
 
     ],
     imports: [

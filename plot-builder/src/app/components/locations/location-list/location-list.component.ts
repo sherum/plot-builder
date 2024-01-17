@@ -3,7 +3,7 @@ import {IEvent, ILocation} from "../../../plot.model";
 import {PlotService} from "../../../plot.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {StoryService} from "../../../story.service";
-import {Observable} from "rxjs";
+import {Observable, of} from "rxjs";
 
 @Component({
   selector: 'app-location-list',
@@ -25,6 +25,8 @@ export class LocationListComponent implements OnInit {
     this.locations = this.storyService.getStoryLocations(this.storyId);
     this.events = this.storyService.getStoryEvents(this.storyId);
   }
-
+  refresh(){
+    this.locations = of(this.plotService.currentStory().locations);
+  }
 
 }

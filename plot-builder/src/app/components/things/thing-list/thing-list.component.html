@@ -1,1 +1,31 @@
-<p>thing-list works!</p>
+<div>Thing List</div>
+<div>
+    <button class="btn btn-outline-success" routerLink="new">Add Thing</button>
+    <button class="btn btn-outline-primary mx-2" (click)="refresh()">Refresh</button>
+    <div>
+
+
+        <table class="table">
+            <thead>
+
+            <tr>
+                <th>Name</th>
+
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr *ngFor="let thing of things|async">
+                <td><a class="link" [routerLink]="[thing.id ]">{{thing.name}}</a></td>
+            </tr>
+            </tbody>
+
+
+        </table>
+    </div>
+
+    <div class="row">
+        <router-outlet></router-outlet>
+
+    </div>
+</div>

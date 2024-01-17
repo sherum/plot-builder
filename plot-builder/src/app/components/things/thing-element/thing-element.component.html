@@ -1,1 +1,37 @@
-<p>thing-element works!</p>
+<div class="container my-3">
+
+    <div class="row">
+    <span>
+      <h3>Thing</h3><h4>{{ thing.name}}</h4>
+    </span>
+        <div class="col-md-12">
+            <form #form=ngForm>
+                <div class="row">
+
+
+                    <div class="form-group col ">
+                        <label class="form-label mx-2">Name </label>
+                        <input name="name" class="form-control" type="text" [ngModel]="thing.name"/>
+                    </div>
+
+                </div>
+                <div class="form-group" [hidden]="true">
+                    <label class="form-label">Id</label>
+                    <input name="id" class="form-control" type="text" [ngModel]="thing.id"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea name="description" class="form-control" type="text" rows="4"
+                              [ngModel]="thing.description"></textarea>
+                </div>
+                <button *ngIf='newFlag' type="button" class="btn btn-outline-success m-2 end" (click)="save(form)">Save</button>
+                <button *ngIf='!newFlag' type="button" class="btn btn-outline-primary my-2 end" (click)="update(form)">Update</button>
+
+
+
+            </form>
+        </div>
+    </div>
+
+</div>

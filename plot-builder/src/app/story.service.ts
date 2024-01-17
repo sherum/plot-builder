@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {IEvent, ILocation, IPlot, IScene, IStory} from "./plot.model";
+import {IEvent, ILocation, IPerson, IPlot, IScene, IStory, IThing} from "./plot.model";
 import {BehaviorSubject, Observable, of} from "rxjs";
 import {PlotService} from "./plot.service";
 import {v4 as uuidv4} from 'uuid';
@@ -46,13 +46,13 @@ export class StoryService {
 
     // @PostMapping(path="story/{storyId}/location")
     createNewLocation(storyId: string, location: ILocation): void {
-        let uri = `${this.endpoint}/story/${storyId}/newlocation`
+        let uri = `${this.endpoint}/story/${storyId}/newLocation`
         this.http.post<IStory>(uri, location, {headers: this.headers})
             .subscribe(istory => this.plotservice.currentStory.update(() => istory));
     }
 
     addNewLocation(storyId: string, location: ILocation): Observable<IStory> {
-        let uri = `${this.endpoint}/story/${storyId}/addlocation`
+        let uri = `${this.endpoint}/story/${storyId}/addLocation`
         return this.http.put<IStory>(uri, location, {headers: this.headers});
     }
 
@@ -83,7 +83,7 @@ export class StoryService {
     // stories/story/{storyId}/event")
     getStoryEvents(storyId: string): Observable<IEvent[]> {
         let uri = `${this.endpoint}/story/${storyId}/event`
-        let event:IEvent[];
+        let event: IEvent[];
         console.log("Getting story events")
         this.http.get<IEvent[]>(uri, {headers: this.headers}).subscribe(ievent => {
             event = ievent;
@@ -92,8 +92,55 @@ export class StoryService {
         return of(event);
     }
 
-    // @PostMapping(path="story/{storyId}/thing")
-    //addNewThing
-    // @PostMapping(path="story/{storyId}/scene")
-    //addNewScene
+    getStoryThings(storyId: string): Observable<IThing[]> {
+        let uri = `${this.endpoint}/story/${storyId}/thing`;
+        let things: IThing[];
+        console.log("Getting story things")
+        this.http.get<IThing[]>(uri, {headers: this.headers}).subscribe(ithing => {
+            things = ithing;
+            console.log("I got my things", things);
+        });
+        return of(things);
+    }
+
+
+    createNewThing(storyId: string, thing: IThing): void {
+        let uri = `${this.endpoint}/story/${storyId}/newThing`
+        this.http.post<IStory>(uri, thing, {headers: this.headers})
+            .subscribe(istory => this.plotservice.currentStory.update(() => istory));
+    }
+
+    addNewThing(storyId: string, thing: IThing): Observable<IStory> {
+        let uri = `${this.endpoint}/story/${storyId}/addThing`
+        return this.http.put<IStory>(uri, thing, {headers: this.headers});
+    }
+
+    // @GetMapping(path="story/{storyId}/location")
+    //"stories/story/{storyId}/thing")
+
+    createNewPerson(storyId: string, person: IPerson): void {
+        let uri = `${this.endpoint}/story/${storyId}/newPerson`
+        this.http.post<IStory>(uri, person, {headers: this.headers})
+            .subscribe(istory => this.plotservice.currentStory.update(() => istory));
+    }
+
+    addNewPerson(storyId: string, person: IPerson): Observable<IStory> {
+        let uri = `${this.endpoint}/story/${storyId}/addPerson`
+        return this.http.put<IStory>(uri, person, {headers: this.headers});
+    }
+
+
+    getStoryPersons(storyId: string): Observable<IPerson[]> {
+        let uri = `${this.endpoint}/story/${storyId}/person`
+        let person: IPerson[];
+        console.log("Getting story persons")
+        this.http.get<IPerson[]>(uri, {headers: this.headers}).subscribe(iperson => {
+            person = iperson;
+            console.log("I got my persons", person);
+        });
+        return of(person);
+    }
+
+
 }
+

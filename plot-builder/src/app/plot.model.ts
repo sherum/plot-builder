@@ -42,6 +42,16 @@ export interface ILocation {
   events?: IEvent[];
   scenes?: IScene[];
 }
+export interface IThing {
+  name: string;
+  id?: string;
+  description?: string;
+}
+export interface IPerson {
+  name: string;
+  id?: string;
+  description?: string;
+}
 
 export const defaultLocation: ILocation = {
   "name": "undefined loc",
@@ -61,6 +71,9 @@ export interface IStory {
 
   summary: string;
 
+  people:Array<IPerson | null>;
+  things:Array<IThing | null>;
+  events:Array<IEvent | null>;
   plots: Array<IPlot | null>;
   locations: Array<ILocation | null>;
   scenes: Array<IScene | null>;
@@ -75,7 +88,10 @@ export const defautStory: IStory = {
   "summary": "new summary",
   "plots": new Array<IPlot>(),
   "scenes": new Array<IScene>(),
-  "locations":new Array<ILocation>()
+  "locations":new Array<ILocation>(),
+  "people": new Array<IPerson>(),
+  "things": new Array<IThing>(),
+  "events":new Array<IEvent>()
 }
 export const defautEvents: IEvent[] = [{
 

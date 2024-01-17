@@ -1,5 +1,16 @@
 import {Injectable, signal} from '@angular/core';
-import {defaultPlots, defautStory, IEvent, IPlot, IScene, IStory, defautEvents, ILocation} from "./plot.model";
+import {
+    defaultPlots,
+    defautStory,
+    IEvent,
+    IPlot,
+    IScene,
+    IStory,
+    defautEvents,
+    ILocation,
+    IThing,
+    IPerson
+} from "./plot.model";
 import {HttpClient, HttpContext, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Observable, Subject} from "rxjs";
 import {DEFAULT_ID} from "./index";
@@ -69,10 +80,6 @@ export class PlotService {
   }
 
 
-  // saveEvent(plotId:string,event:IEvent):Observable<IPlot>{
-  //   let uri = `${this.endpoint}/plot/event/save/${plotId}`;
-  //   return this.http.post<IPlot>(uri,event,{headers:this.headers})
-  // }
  saveEvent(plotId:string,plot:IPlot):Observable<IPlot>{
     let uri = `${this.endpoint}/plot/event/save/${plotId}`;
     return this.http.post<IPlot>(uri,plot,{headers:this.headers})
@@ -122,14 +129,6 @@ export class PlotService {
     return this.http.post<IPlot>(uri, plot, {headers: putHeaders});
   }
 
-//   getSubplots(storyId:string,plotId:string):Observable<IPlot[]|[]> {
-//     let uri = `${this.endpoint}/plot/subplots/${storyId}/${plotId}`;
-//     return this.http.get<IPlot[]>(uri,{headers:this.headers});
-//
-//
-// }
-
-
   getStory(id: string): Observable<IStory> {
     let uri = `${this.endpoint}/stories/${id}`;
     return this.http.get<IStory>(uri, {headers: this.headers});
@@ -145,12 +144,7 @@ export class PlotService {
     console.log("Get event by eid only clicked Service call uri: ",uri);
     return this.http.get<IEvent>(uri, {headers: this.headers});
   }
- // getEvent(eid: string,pid: string): Observable<IEvent> {
- //
- //    let uri = `${this.endpoint}/plot/${pid}/event/${eid}`;
- //    console.log("Get event clicked Service call uri: ",uri);
- //    return this.http.get<IEvent>(uri, {headers: this.headers});
- //  }
+
 
   getLocation(id:string):Observable<ILocation>{
     let uri = `${this.endpoint}/location/${id}`;
@@ -190,4 +184,15 @@ export class PlotService {
     this.http.delete(uri,{headers:this.headers}).subscribe((resp=>console.log("plot deleted",resp)));
   }
 
+
+    getThing(thingId: string):Observable<IThing> {
+      let uri = `${this.endpoint}/things/${thingId}`
+        return this.http.get<IThing>(uri,{headers:this.headers})
+
+    }
+
+    getPerson(personId: string): Observable<IPerson> {
+        let uri = `${this.endpoint}/person/${personId}`
+        return this.http.get<IPerson>(uri,{headers:this.headers})
+    }
 }

@@ -1,1 +1,31 @@
-<p>person-list works!</p>
+<div>Person List</div>
+<div>
+    <button class="btn btn-outline-success" routerLink="new">Add Person</button>
+    <button class="btn btn-outline-primary mx-2" (click)="refresh()">Refresh</button>
+    <div>
+
+
+        <table class="table">
+            <thead>
+
+            <tr>
+                <th>Name</th>
+
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr *ngFor="let person of persons|async">
+                <td><a class="link" [routerLink]="[person.id ]">{{person.name}}</a></td>
+            </tr>
+            </tbody>
+
+
+        </table>
+    </div>
+
+    <div class="row">
+        <router-outlet></router-outlet>
+
+    </div>
+</div>

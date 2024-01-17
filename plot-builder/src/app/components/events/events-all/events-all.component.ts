@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from "rxjs";
+import {Observable, of} from "rxjs";
 import {IEvent, ILocation} from "../../../plot.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PlotService} from "../../../plot.service";
@@ -31,6 +31,10 @@ export class EventsAllComponent implements OnInit {
     updateLocation(eventId: string, locationId: string) {
         this.plotService.linkEventLocation(eventId, locationId)
 
+    }
+
+    refresh(){
+        this.events = of(this.plotService.currentStory().events);
     }
 
 

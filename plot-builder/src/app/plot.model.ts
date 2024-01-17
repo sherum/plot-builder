@@ -36,6 +36,7 @@ export interface IScene {
 
 export interface ILocation {
   name: string;
+  story?:IStory;
   id?: string;
   description?: string;
   events?: IEvent[];
@@ -61,6 +62,7 @@ export interface IStory {
   summary: string;
 
   plots: Array<IPlot | null>;
+  locations: Array<ILocation | null>;
   scenes: Array<IScene | null>;
 }
 
@@ -72,7 +74,8 @@ export const defautStory: IStory = {
   "maguffin": "new maguffin",
   "summary": "new summary",
   "plots": new Array<IPlot>(),
-  "scenes": new Array<IScene>()
+  "scenes": new Array<IScene>(),
+  "locations":new Array<ILocation>()
 }
 export const defautEvents: IEvent[] = [{
 
@@ -87,7 +90,7 @@ export const defautEvents: IEvent[] = [{
 export const defaultEvent: IEvent = {
 
   "description": "New event",
-  "id": 'new',
+  "id": DEFAULT_ID,
   "dtg": "22 Jun 2026: 1400",
   "name": "Plot Event",
   "type": "incident, event, season",

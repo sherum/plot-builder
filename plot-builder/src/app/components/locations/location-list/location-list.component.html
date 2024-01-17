@@ -1,1 +1,34 @@
-<p>location-list works!</p>
+<div>Locations List</div>
+<div>
+  <button class="btn btn-outline-success" routerLink="new">Add Location</button>
+  <div>
+
+
+    <table class="table">
+      <thead>
+
+      <tr>
+        <th>Name</th>
+
+      </tr>
+      </thead>
+      <tbody>
+
+      <tr *ngFor="let location of locations|async">
+        <!--          <td><a class="link" [routerLink]="['/plots',plot.id]">{{plot.name}}</a></td>-->
+        <!--            <td><a class="link" (click)="select(location)">{{location.name}}</a></td>-->
+        <!--        <td><a class="link" [routerLink]="['location',location.id]" >{{location.name}}</a></td>-->
+        <td><a class="link" [routerLink]="[location.id ]">{{location.name}}</a></td>
+<!--        <td *ngIf="location.locationId"><a class="link" [routerLink]="['location',location.id,'location',location.locationId,]">{{location.locationId}}</a></td>-->
+<!--        <td *ngIf="!location.locationId"><a class="link" [routerLink]="['location',location.id,'location','new']">Add Location</a></td>-->
+      </tr>
+      </tbody>
+
+
+    </table>
+  </div>
+    <div class="row">
+      <router-outlet></router-outlet>
+
+    </div>
+</div>

@@ -24,7 +24,11 @@ export class StoryComponent implements OnInit {
       data => {
         let id  = data['id'];
 
-        this.plotService.getStory(id).subscribe(storee => this.story = storee);
+        this.plotService.getStory(id).subscribe(storee => {
+          this.story = storee;
+          this.plotService.currentStory.update(()=>storee)
+        });
+
 
       }
     );

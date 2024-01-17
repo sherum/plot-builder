@@ -13,6 +13,7 @@ export class PlotListComponent implements OnInit {
 
 //@Input() plotlist:IPlot[];
   plotlist;
+  //.subscribe(story => this.plotlist = story.plots);
   storyId= '';
 
 

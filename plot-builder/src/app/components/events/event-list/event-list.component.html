@@ -16,17 +16,18 @@
       <tr *ngFor="let event of events">
         <!--          <td><a class="link" [routerLink]="['/plots',plot.id]">{{plot.name}}</a></td>-->
 <!--            <td><a class="link" (click)="select(event)">{{event.name}}</a></td>-->
-        <td><a class="link" [routerLink]="['event',event.id]" >{{event.name}}</a></td>
-        <td *ngIf="event.location"><a class="link" [routerLink]="['location',event.location.id,'event',event.id]">{{event.location.name}}</a></td>
-       <td *ngIf="!event.location"><a class="link" [routerLink]="['location','new','event',event.id,]">Add Location</a></td>
+<!--        <td><a class="link" [routerLink]="['event',event.id]" >{{event.name}}</a></td>-->
+           <td><a class="link" [routerLink]="['event',event.id ]">{{event.name}}</a></td>
+       <td *ngIf="event.location"><a class="link" [routerLink]="['event',event.id,'location',event.location.id,]">{{event.location.name}}</a></td>
+       <td *ngIf="!event.location"><a class="link" [routerLink]="['event',event.id,'location','new']">Add Location</a></td>
       </tr>
       </tbody>
 
 
     </table>
   </div>
-  <div class="row">
-    <router-outlet></router-outlet>
+<!--  <div class="row">-->
+<!--    <router-outlet></router-outlet>-->
 
-  </div>
+<!--  </div>-->
 </div>

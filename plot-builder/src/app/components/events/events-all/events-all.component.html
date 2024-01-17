@@ -1,0 +1,39 @@
+<div>Events List</div>
+<div>
+    <button class="btn btn-outline-success" routerLink="new">Add Event</button>
+    <div>
+
+
+        <table class="table">
+            <thead>
+
+            <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Update</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr *ngFor="let event of events|async">
+                <td><a class="link" [routerLink]="[event.id ]">{{event.name}}</a></td>
+                <td>{{event?.location?.name}}</td>
+
+<!--                <td *ngFor="let location of locations|async" >-->
+<!--                    <select name="location" (change)="updateLocation(event.id,location.id) ">-->
+<!--                        <option value="{{location.id}}">{{location.name}}</option>-->
+<!--                    </select></td>-->
+<!--                <td *ngIf="event.location"><a class="link" [routerLink]="['event',event.id,'location',event.location.id,]">{{event.location.name}}</a></td>-->
+<!--                <td *ngIf="!event.location"><a class="link" [routerLink]="['event',event.id,'location','new']">Add Location</a></td>-->
+            </tr>
+            </tbody>
+
+
+        </table>
+    </div>
+
+      <div class="row">
+        <router-outlet></router-outlet>
+
+      </div>
+</div>

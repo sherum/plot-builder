@@ -1,21 +1,21 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { PlotComponent } from './components/plots/plot/plot.component';
-import { PlotViewComponent } from './components/plots/plot-view/plot-view.component';
-import { PlotListComponent } from './components/plots/plot-list/plot-list.component';
-import { PlotElementComponent } from './components/plots/plot-element/plot-element.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {PlotComponent} from './components/plots/plot/plot.component';
+import {PlotViewComponent} from './components/plots/plot-view/plot-view.component';
+import {PlotListComponent} from './components/plots/plot-list/plot-list.component';
+import {PlotElementComponent} from './components/plots/plot-element/plot-element.component';
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
-import { StoryComponent } from './components/stories/story/story.component';
-import { StoryListComponent } from './components/stories/story-list/story-list.component';
-import { StoryViewComponent } from './components/stories/story-view/story-view.component';
-import {HttpClientModule} from "@angular/common/http";
-import { StoryEditComponent } from './components/stories/story-edit/story-edit.component';
-import { ProfileComponent } from './components/profiles/profile/profile.component';
-import { PlotDetailComponent } from './components/plots/plot-detail/plot-detail.component';
+import {StoryComponent} from './components/stories/story/story.component';
+import {StoryListComponent} from './components/stories/story-list/story-list.component';
+import {StoryViewComponent} from './components/stories/story-view/story-view.component';
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {StoryEditComponent} from './components/stories/story-edit/story-edit.component';
+import {ProfileComponent} from './components/profiles/profile/profile.component';
+import {PlotDetailComponent} from './components/plots/plot-detail/plot-detail.component';
 import {SubplotComponent} from "./components/plots/plot-subplot/subplot.component";
 import {EventComponent} from "./components/events/event/event.component";
 import {EventListComponent} from "./components/events/event-list/event-list.component";
@@ -31,50 +31,61 @@ import {PlotLoopComponent} from "./components/plots/plot-loop/plot-loop.componen
 import {LocationListComponent} from "./components/locations/location-list/location-list.component";
 import {LocationElementComponent} from "./components/locations/location-element/location-element.component";
 import {NavBarComponent} from "./nav-bar/nav-bar.component";
-
+import {EventViewComponent} from "./components/events/event-view/event-view.component";
+import {HeadersInterceptor} from "./HeadersInterceptor";
+import {CacheInterceptor} from "./CacheInterceptor";
+import {LoggingInterceptor} from "./LoggingInterceptor";
+import { EventsAllComponent } from './components/events/events-all/events-all.component';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    PlotComponent,
-    PlotViewComponent,
-    PlotListComponent,
-    PlotElementComponent,
-    StoryComponent,
-    StoryListComponent,
-    StoryViewComponent,
-    StoryEditComponent,
-    ProfileComponent,
-    PlotDetailComponent,
-    SubplotComponent,
-    EventComponent,
-    EventListComponent,
-    OmniListComponent,
-    PersonElementComponent,
-    PersonListComponent,
-    ThingListComponent,
-    ThingElementComponent,
-    EventListComponent,
-    EventElementComponent,
-    AltPlotElementComponent,
-    PlotLoopComponent,
-    NavBarComponent,
-    LocationElementComponent,
-    LocationListComponent,
+    declarations: [
+        AppComponent,
+        PlotComponent,
+        PlotViewComponent,
+        PlotListComponent,
+        PlotElementComponent,
+        StoryComponent,
+        StoryListComponent,
+        StoryViewComponent,
+        StoryEditComponent,
+        ProfileComponent,
+        PlotDetailComponent,
+        SubplotComponent,
+        EventComponent,
+        EventListComponent,
+        OmniListComponent,
+        PersonElementComponent,
+        PersonListComponent,
+        ThingListComponent,
+        ThingElementComponent,
+        EventListComponent,
+        EventElementComponent,
+        AltPlotElementComponent,
+        PlotLoopComponent,
+        NavBarComponent,
+        LocationElementComponent,
+        LocationListComponent,
+        EventViewComponent,
+        EventsAllComponent
 
-  ],
-  imports: [
-    BrowserModule,
-    CommonModule,
-    HttpClientModule,
-    FormsModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  exports: [
-    PlotListComponent
-  ],
-  bootstrap: [AppComponent]
+    ],
+    imports: [
+        BrowserModule,
+        CommonModule,
+        HttpClientModule,
+        FormsModule,
+        AppRoutingModule
+    ],
+    providers: [
+        {provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true},
+        {provide: HTTP_INTERCEPTORS, useClass: HeadersInterceptor, multi: true},
+        {provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true}
+    ],
+    exports: [
+        PlotListComponent
+    ],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

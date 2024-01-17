@@ -25,11 +25,6 @@
          </div>
 
         <div class="form-group">
-          <label class="form-label">Location</label>
-          <!--          <input name="location" class="form-control" type="text" [ngModel]="eventLocation.name"/>-->
-          <a type="link" [routerLink]="['location',event?.location?.id,'event',event.id]">{{event?.location?.name}}</a>
-        </div>
-        <div class="form-group">
           <label class="form-label">Date/Time</label>
           <input name="dtg" class="form-control" type="text" [ngModel]="event.dtg"/>
         </div>
@@ -38,6 +33,11 @@
           <label class="form-label">Description</label>
           <textarea name="description" class="form-control" type="text" rows="4"
                     [ngModel]="event.description"></textarea>
+        </div>
+        <div [hidden]="true" class="form-group">
+          <label class="form-label mx-2">Location: </label>
+          <!--          <input name="location" class="form-control" type="text" [ngModel]="eventLocation.name"/>-->
+          <a type="link" [routerLink]="['event',event.id,'location',event?.location.id]">{{event?.location.name}}</a>
         </div>
         <button type="button" class="btn btn-outline-primary my-2 end" (click)="save(form)">Save</button>
 

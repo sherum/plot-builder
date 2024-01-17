@@ -1,8 +1,9 @@
 import {Injectable, signal} from '@angular/core';
 import {defaultPlots, defautStory, IEvent, IPlot, IScene, IStory, defautEvents, ILocation} from "./plot.model";
-import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpContext, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Observable, Subject} from "rxjs";
 import {DEFAULT_ID} from "./index";
+import {DP1} from "./HeadersInterceptor";
 
 
 @Injectable({
@@ -48,7 +49,9 @@ export class PlotService {
 
   saveStory() {
     let uri = `${this.endpoint}/story`;
-    this.http.post<IStory>(uri, this.currentStory(), {headers: this.headers}).subscribe({
+      let my_ctx = new HttpContext();
+      my_ctx.set(DP1,"Missionary");
+    this.http.post<IStory>(uri, this.currentStory(), {headers: this.headers,context:my_ctx}).subscribe({
       next: data => this.updateCurrentStory(data),
       error: err => console.log("error ", err),
       //complete: () => this.getStories().subscribe(data => console.log("Update result", data))
@@ -66,13 +69,17 @@ export class PlotService {
   }
 
 
-  saveEvent(plotId:string,event:IEvent):Observable<IPlot>{
+  // saveEvent(plotId:string,event:IEvent):Observable<IPlot>{
+  //   let uri = `${this.endpoint}/plot/event/save/${plotId}`;
+  //   return this.http.post<IPlot>(uri,event,{headers:this.headers})
+  // }
+ saveEvent(plotId:string,plot:IPlot):Observable<IPlot>{
     let uri = `${this.endpoint}/plot/event/save/${plotId}`;
-    return this.http.post<IPlot>(uri,event,{headers:this.headers})
+    return this.http.post<IPlot>(uri,plot,{headers:this.headers})
   }
 
-  getEvents(plotId:string):Observable<IEvent[]>{
-    let uri = `${this.endpoint}/plot/${plotId}`;
+  getEvents():Observable<IEvent[]>{
+    let uri = `${this.endpoint}/event`;
     return this.http.get<IEvent[]>(uri,{headers:this.headers});
   }
 
@@ -132,28 +139,50 @@ export class PlotService {
     let uri = `${this.endpoint}/plot/${id}`;
     return this.http.get<IPlot>(uri, {headers: this.headers});
   }
-  getEvent(eid: string,pid: string): Observable<IEvent> {
+  getEvent(eid: string,pid:string): Observable<IEvent> {
 
-    let uri = `${this.endpoint}/plot/event/${pid}/${eid}`;
-    console.log("Get event clicked Service call uri: ",uri);
+    let uri = `${this.endpoint}/event/${eid}`;
+    console.log("Get event by eid only clicked Service call uri: ",uri);
     return this.http.get<IEvent>(uri, {headers: this.headers});
   }
+ // getEvent(eid: string,pid: string): Observable<IEvent> {
+ //
+ //    let uri = `${this.endpoint}/plot/${pid}/event/${eid}`;
+ //    console.log("Get event clicked Service call uri: ",uri);
+ //    return this.http.get<IEvent>(uri, {headers: this.headers});
+ //  }
 
   getLocation(id:string):Observable<ILocation>{
     let uri = `${this.endpoint}/location/${id}`;
     return this.http.get<ILocation>(uri,{headers:this.headers});
   }
 
-  saveLocation(eventId:string,location:ILocation):Observable<ILocation>{
-    let uri = `${this.endpoint}/event/${eventId}/location`;
-    return this.http.post<ILocation>(uri,location,{headers:this.headers})
-
+  getLocations(): Observable<ILocation[]> {
+    let uri = `${this.endpoint}/location`;
+    return this.http.get<ILocation[]>(uri, {headers: this.headers});
   }
 
-  updateEvent(event:IEvent):Observable<IEvent>{
+  saveLocation(location:ILocation):Observable<ILocation>{
+    let uri = `${this.endpoint}/location`;
+    return this.http.post<ILocation>(uri,location,{headers:this.headers})
+  }
+
+  linkLocation(eventId:string,location:ILocation):Observable<IEvent>{
+    let uri = `${this.endpoint}/event/${eventId}/linklocal`;
+    return this.http.put<IEvent>(uri,location,{headers:this.headers})
+  }
+
+    linkEventLocation(eventId:string,locationId:string):Observable<IEvent>{
+        let uri = `${this.endpoint}/event/${eventId}/location/${locationId}`;
+        return this.http.put<IEvent>(uri,location,{headers:this.headers})
+    }
+
+    updateEvent(event:IEvent):Observable<IEvent>{
     let uri = `${this.endpoint}/event`;
+    let noLocEvent = event;
+    noLocEvent.location=null;
     console.log("Update event from plotservice", event);
-     return this.http.post<IEvent>(uri,event,{headers:this.headers})
+     return this.http.post<IEvent>(uri,noLocEvent,{headers:this.headers})
   }
 
   deletePlot(plotId:string){

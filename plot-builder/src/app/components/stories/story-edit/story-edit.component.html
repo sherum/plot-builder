@@ -1,4 +1,5 @@
-<div *ngIf="new" class="container">
+<!--<div *ngIf="new" class="container">-->
+  <div class="container">
   <form #form=ngForm>
 
 
@@ -42,93 +43,51 @@
   </form>
 
 
-{{form.value|json}}
-</div>
-{{story.id|json}}
-
-<div *ngIf="!new" class="container">
-  <form #form=ngForm>
-
-
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="new-title">Title:</span>
-      </div>
-      <input class="form-control col-md-8" type="text" name="title" id="es-title" [(ngModel)]="story.title "/>
-    </div>
-
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="new-author">Author:</span>
-      </div>
-      <input class="form-control" type="text" name="author" id="es-author" [(ngModel)]="story.author "/>
-    </div>
-
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="new-genre">Genre:</span>
-      </div>
-      <input class="form-control" type="text" name="genre" id="es-genre" [(ngModel)]="story.genre "/>
-    </div>
-
-    <div class="row">
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="new-maguffin">Maguffin:</span>
-        </div>
-        <textarea class="form-control" name="maguffin" id="es-maguffin" [(ngModel)]="story.maguffin " ></textarea>
-      </div>
-
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="new-summary">Summary:</span>
-        </div>
-        <textarea class="form-control" name="summary" id="es-summary" [(ngModel)]="story.summary"></textarea>
-      </div>
-    </div>
-    <button class="btn btn-success" type="button" (click)="update()">Save</button>
-  </form>
-
-<!--  <div class="row my-2">-->
-<!--    <div class="col">-->
-<!--      <button (click)="addPlot()" type="button" class="btn btn-sm btn-primary">Add Plot</button>-->
-<!--      <table class="table">-->
-<!--        <label>Plots</label>-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--          <th>Name</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--        <tr *ngFor="let plot of story.plots">-->
-<!--          &lt;!&ndash;          <td><a class="link" (click)="selectPlot(plot)"> {{plot.name}}</a></td>&ndash;&gt;-->
-<!--          <td><a class="link" routerLink="plots"> {{plot.name}}</a></td>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--      </table>-->
-<!--    </div>-->
-<!--    <hr/>-->
-<!--    <div class="col">-->
-<!--      <button routerLink="scene" type="button" class="btn btn-sm btn-primary">Add Scene</button>-->
-<!--      <table class="table">-->
-<!--        <label>Scenes</label>-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--          <th>Name</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--        <tr *ngFor="let scene of story.scenes">-->
-<!--          <td>{{scene.name}}</td>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--      </table>-->
-
-<!--    </div>-->
-<!--  </div>-->
-
+<!--{{form.value|json}}-->
 <!--</div>-->
+<!--{{story.id|json}}-->
 
-<!--<router-outlet></router-outlet>-->
+<!--<div *ngIf="false" class="container">-->
 
+<!--  <form #form=ngForm>-->
+
+
+<!--    <div class="input-group mb-3">-->
+<!--      <div class="input-group-prepend">-->
+<!--        <span class="input-group-text" id="new-title">Title:</span>-->
+<!--      </div>-->
+<!--      <input class="form-control col-md-8" type="text" name="title" id="es-title" [(ngModel)]="story.title "/>-->
+<!--    </div>-->
+
+<!--    <div class="input-group mb-3">-->
+<!--      <div class="input-group-prepend">-->
+<!--        <span class="input-group-text" id="new-author">Author:</span>-->
+<!--      </div>-->
+<!--      <input class="form-control" type="text" name="author" id="es-author" [(ngModel)]="story.author "/>-->
+<!--    </div>-->
+
+<!--    <div class="input-group mb-3">-->
+<!--      <div class="input-group-prepend">-->
+<!--        <span class="input-group-text" id="new-genre">Genre:</span>-->
+<!--      </div>-->
+<!--      <input class="form-control" type="text" name="genre" id="es-genre" [(ngModel)]="story.genre "/>-->
+<!--    </div>-->
+
+<!--    <div class="row">-->
+<!--      <div class="input-group mb-3">-->
+<!--        <div class="input-group-prepend">-->
+<!--          <span class="input-group-text" id="new-maguffin">Maguffin:</span>-->
+<!--        </div>-->
+<!--        <textarea class="form-control" name="maguffin" id="es-maguffin" [(ngModel)]="story.maguffin " ></textarea>-->
+<!--      </div>-->
+
+<!--      <div class="input-group mb-3">-->
+<!--        <div class="input-group-prepend">-->
+<!--          <span class="input-group-text" id="new-summary">Summary:</span>-->
+<!--        </div>-->
+<!--        <textarea class="form-control" name="summary" id="es-summary" [(ngModel)]="story.summary"></textarea>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <button class="btn btn-success" type="button" (click)="update()">Save</button>-->
+<!--  </form>-->
 

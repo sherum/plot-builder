@@ -3,6 +3,7 @@ import {PlotService} from "../../../plot.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {defautStory, IStory} from "../../../plot.model";
 import {NgForm} from "@angular/forms";
+import {StoryService} from "../../../story.service";
 
 @Component({
   selector: 'app-story-edit',
@@ -15,27 +16,27 @@ export class StoryEditComponent implements OnInit {
   story: IStory = defautStory;
   new = true;
 
-  constructor(private plotService: PlotService, private route: ActivatedRoute, private router: Router) {
+  constructor(private storyService:StoryService, private plotService: PlotService, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
 
-    this.route.queryParams.subscribe(params => {
-      this.new = params['new'];
-        if (!this.new) {
-          this.route.params.subscribe(
-            data => {
-              let id = data['id'];
-              this.plotService.getStory(id).subscribe(storee => this.story = storee);
-
-            }
-          )
-        }
-        // else {
-        //   this.story = defautStory
-        // }
-      }
-    );
+    // this.route.queryParams.subscribe(params => {
+    //   this.new = params['new'];
+    //     if (!this.new) {
+    //       this.route.params.subscribe(
+    //         data => {
+    //           let id = data['id'];
+    //           this.plotService.getStory(id).subscribe(storee => this.story = storee);
+    //
+    //         }
+    //       )
+    //     }
+    //     else {
+    //       this.story = defautStory
+    //     }
+    //   }
+    // );
   }
 
 
@@ -45,17 +46,17 @@ export class StoryEditComponent implements OnInit {
     this.story.genre = form.value.genre;
     this.story.maguffin = form.value.maguffin;
     this.story.summary = form.value.summary;
-    this.story.id = '94423984-fb5c-44fb-ba5e-6d3bb6737ba3';
+    // this.story.id = '94423984-fb5c-44fb-ba5e-6d3bb6737ba3';
     console.log("story data after mapping:",this.story);
+    this.storyService.createStory(this.story);
     this.plotService.updateCurrentStory(this.story);
-    this.plotService.saveStory();
-    this.router.navigate(['stories']);
+    this.router.navigate(['home','stories']);
   }
 
 
   update() {
     this.plotService.updateCurrentStory(this.story);
     this.plotService.updateStory(this.story.id);
-    this.router.navigate(['stories']);
+    this.router.navigate(['home','stories']);
   }
 }

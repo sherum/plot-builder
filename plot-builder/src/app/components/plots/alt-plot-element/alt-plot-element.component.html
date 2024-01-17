@@ -37,17 +37,10 @@
 
       </form>
     </div>
-
-
-    <!--        <div class="col-md-3">-->
-    <!--          <app-plot-subplot-->
-    <!--          [subplots]="plot.subplots"-->
-    <!--          (selectedPlot)="select($event)"></app-plot-subplot>-->
-    <!--        </div>-->
     <div class="col-md-12">
       <app-event-list *ngIf="plot.events"
-                      [events]="plot.events"
-                      (select)="selectEvent($event)"></app-event-list>
+                        [events]="plot.events"></app-event-list>
+<!--                      (selectedEvent)="selectEvent($event)"></app-event-list>-->
 
     </div>
 

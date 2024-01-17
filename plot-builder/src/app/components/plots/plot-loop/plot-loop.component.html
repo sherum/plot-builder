@@ -11,7 +11,7 @@
       </thead>
       <tbody>
       <tr>
-        <td><button type="button" class="btn btn-sm btn-outline-success" [routerLink]="[plot.id]">{{plot.name}}</button></td>
+        <td><a type="button" class="link" [routerLink]="[plot.id]">{{plot.name}}</a></td>
         <app-plot-loop [plotlist]="plot.subplots"  ></app-plot-loop>
       </tr>
       </tbody>

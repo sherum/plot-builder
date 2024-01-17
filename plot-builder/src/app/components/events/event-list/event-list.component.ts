@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {PlotService} from "../../../plot.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {IEvent} from "../../../plot.model";
+import {StoryService} from "../../../story.service";
 
 @Component({
   selector: 'app-event-list',
@@ -13,13 +14,13 @@ export class EventListComponent implements OnInit {
   @Output() selectedEvent = new EventEmitter<IEvent>();
   // events;
 
-  constructor(private plotService: PlotService, private route: ActivatedRoute, private router:Router) {
-
+  constructor(private route: ActivatedRoute, private router: Router, private plotService: PlotService, private storyService: StoryService) {
   }
+
 
   ngOnInit() {
 
-    console.log("Events",this.events);
+    console.log("Current Events",this.events);
   }
 
   select(event) {
@@ -29,4 +30,5 @@ export class EventListComponent implements OnInit {
   // openLocation(id:string){
   //   this.router.navigate(['locations',id]);
   // }
+
 }
